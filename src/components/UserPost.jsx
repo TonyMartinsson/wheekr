@@ -41,7 +41,6 @@ const postContainer = {
 
 const avatarContainer = {
   display: 'flex',
-  // flexDirection: 'column',
   alignItems: 'flex-start'
 }
 const avatar = {

@@ -19,13 +19,24 @@ function NewPost() {
     return (
         <div>
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="standard-basic" label="Standard" />
-                <Button size="small" variant="contained" color="primary">
-                    Wheek
-                </Button>
+                <div style={wheekContainer}>
+                    <TextField id="standard-basic" label="Standard" />
+                    <Button size="medium" variant="contained" style={buttonStyle}>Wheek</Button>           
+                </div>
             </form>            
         </div>
     )
+}
+
+const wheekContainer = {
+  width: '80%',
+  marginLeft: '5.9rem',
+}
+
+const buttonStyle = {
+  background: 'green',
+  color: 'white',
+  margin: '1rem'
 }
 
 export default NewPost;
