@@ -20,7 +20,7 @@ function NewPost() {
         <div>
             <form className={classes.root} noValidate autoComplete="off">
                 <div style={wheekContainer}>
-                    <TextField id="standard-basic" label="Standard" />
+                    <TextField id="standard-basic" label="New post" />
                     <Button size="medium" variant="contained" style={buttonStyle}>Wheek</Button>           
                 </div>
             </form>            
