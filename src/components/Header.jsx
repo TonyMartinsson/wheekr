@@ -7,8 +7,28 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import { Link } from 'react-router-dom';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    logoSize: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down('xs')]: {
+        transform: 'scale(0.5)',
+      },
+      [theme.breakpoints.up('sm')]: {
+        transform: 'scale(0.75)',
+      },
+      [theme.breakpoints.up('md')]: {
+        transform: 'scale(1.0)',
+      },
+    },
+  }),
+);
 
 function Header() { 
+    const classes = useStyles();
     const [openLogin, setOpenLogin] = React.useState(false);
     const [openSignup, setOpenSignup] = React.useState(false);
     
@@ -30,7 +50,9 @@ function Header() {
     
     return (
       <div style={headerStyle}>
-        <img style={logoStyle} src={logo} alt="Logo" />
+        <Link to="/" >
+          <img style={logoStyle} className={classes.logoSize} src={logo} alt="Logo" />
+        </Link>
         <div style={buttonContainer}>
 
           <Button size="medium" variant="contained" style={buttonStyle} onClick={openLoginModal}>LOGIN</Button>
