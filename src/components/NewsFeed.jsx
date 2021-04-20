@@ -1,6 +1,9 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
 import { makeStyles, createStyles} from '@material-ui/core/styles';
+import UserPost from './UserPost';
+import List from '@material-ui/core/List';
+import NewPost from './NewPost';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,8 +26,13 @@ function NewsFeed() {
     const classes = useStyles(); 
     return (
         <div className={classes.root}>
-          <Container maxWidth="lg">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita assumenda labore autem nemo iusto numquam, non laboriosam mollitia ipsum cumque dolorem fugiat velit iste molestias voluptate suscipit reprehenderit, perferendis accusantium!</p>
+          <Container maxWidth="md">
+            <NewPost/>
+          <List className={classes.root}>
+             <UserPost/>
+             <UserPost/>
+             <UserPost/>
+             </List>
           </Container>
         </div>
       );
