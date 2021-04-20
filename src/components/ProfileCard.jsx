@@ -7,7 +7,7 @@ function ProfileCard() {
         <div style={profileContainer}>
                 <div style={userNameStyle}>
                     <img style={profileStyle} src={profilepic} alt="profile pic" />
-                    <p>USERNAME</p>
+                    <p style={{color:'white'}}>USERNAME</p>
                     <Button size="small" variant="contained" style={buttonStyle}>LOG OUT</Button>
                 </div>
         </div>
