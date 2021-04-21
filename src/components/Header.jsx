@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Button, Hidden } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -56,10 +56,8 @@ function Header() {
         </Link>
         <div style={buttonContainer}>
 
-          <Hidden smDown>
             <Button size="medium" variant="contained" style={buttonStyle} onClick={openLoginModal}>LOGIN</Button>
             <Button size="medium" variant="contained" style={buttonStyle} onClick={openSignupModal}>SIGNUP</Button>
-          </Hidden>
 
           <Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
             <DialogTitle id="login">Login</DialogTitle>
