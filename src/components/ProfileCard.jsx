@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
 import profilepic from '../assets/profilepic.png';
 import Button from '@material-ui/core/Button';
@@ -6,23 +5,37 @@ import Button from '@material-ui/core/Button';
 function ProfileCard() {   
     return (
         <div style={profileContainer}>
-            <Typography>Username</Typography>
-            <img style={profileStyle} src={profilepic} alt="profile pic" />
-            <Button size="small" variant="contained" color="primary">
-            Log Out
-          </Button>
+                <div style={userNameStyle}>
+                    <img style={profileStyle} src={profilepic} alt="profile pic" />
+                    <p style={{color:'white'}}>USERNAME</p>
+                    <Button size="small" variant="contained" style={buttonStyle}>LOG OUT</Button>
+                </div>
         </div>
     )    
 }
 
 const profileContainer = {
     display: 'flex',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    textAlign: 'center'
 }
 
 const profileStyle = {
-    width: '3rem',
-    margin: '0 1rem'   
+    height: '3rem',
+    margin: '0 1rem',   
+    borderRadius: '50%'
 }
+
+const userNameStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+}
+
+const buttonStyle = {
+    background: 'green',
+    color: 'white',
+    margin: '1rem'
+  }
 
 export default ProfileCard;
