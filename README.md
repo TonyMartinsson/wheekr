@@ -68,3 +68,38 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+// definera alla endpoints för erat API (router)
+
+// Detta skall ligga i postRouter
+app.get('/api/posts', async (req, res) => {
+    const posts = await PostModel.find({});
+    res.status(200).json(posts);
+});
+
+app.post('/api/posts', async (req, res) => {
+    const post = await PostModel.create(req.body);
+    res.status(201).json(post);
+});
+
+//app.use(userRouter);
+//app.use(postRouter);
+
+// Lägg till en felhanterare (VG)
+
+app.listen(4000);
+
+
+// npm i express
+// npm i nodemon
+// npm i mongoose
+// installera servern för ditt OS.
+
+mongoose.connect('mongodb://localhost:27017/api', {useNewUrlParser: true, useUnifiedTopology: true });
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function() {
+    console.log('HEJ SVEJS')
+});

@@ -1,0 +1,12 @@
+GET http://localhost:4000/api/posts
+
+###
+
+POST http://localhost:4000/api/posts
+Content-Type: application/json
+
+{
+    "user": "Tony",
+    "message": "Jag vill ha nya gitarrer och mer kaffe!!!!!"
+}
+
