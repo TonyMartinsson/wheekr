@@ -2,11 +2,13 @@ const express = require('express')
 const mongoose = require('mongoose');
 require('express-async-errors');
 const postRouter = require('./routers/post.router');
+const userRouter = require('./routers/user.router');
 const app = express();
 
 app.use(express.json())
 
-app.use(postRouter);
+//app.use(postRouter);
+app.use(userRouter, postRouter);
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).json(err.message)

@@ -10,3 +10,15 @@ Content-Type: application/json
     "message": "Jag vill ha nya gitarrer och mer kaffe!!!!!"
 }
 
+###
+GET http://localhost:4000/api/users
+
+###
+
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+    "username": "Tony",
+    "password": "jagvillhakaffe"
+}
