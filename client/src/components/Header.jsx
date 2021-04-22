@@ -48,6 +48,13 @@ function Header() {
     function openSignupModal() {
         setOpenSignup(true);
     }
+
+    const login = ()=> {
+      // hämta värden från inputfält
+      // fetch
+      // spara inloggad användare i LS
+      
+    }
     
     return (
       <div style={headerStyle}>
@@ -113,7 +120,7 @@ function Header() {
               <Button onClick={handleSignupClose} color="primary">
                 Go back
                   </Button>
-              <Button disabled variant="contained" color="primary">
+              <Button onClick={login} variant="contained" color="primary">
                 Register
                   </Button>
             </DialogActions>
