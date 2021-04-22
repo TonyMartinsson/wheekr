@@ -8,7 +8,12 @@ router.get('/api/posts', async (req, res) => {
 });
 
 router.post('/api/posts', async (req, res) => {
-    const post = await PostModel.create(req.body);
+    const postToSave = {
+        user: req.body.user,
+        message: req.body.message,
+        timestamp: new Date()
+    }
+    const post = await PostModel.create(postToSave);
     res.status(201).json(post);
 });
 

@@ -6,8 +6,7 @@ POST http://localhost:4000/api/posts
 Content-Type: application/json
 
 {
-    "user": "Ruben",
-    "message": "Jag vill ha ärtplättar!!!!",
-    "timestamp": "2021-04-22"
+    "user": "Tony",
+    "message": "Jag vill ha nya gitarrer och mer kaffe!!!!!"
 }
 

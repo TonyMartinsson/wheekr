@@ -54,7 +54,7 @@ class NewsFeed extends Component {
       if(!posts) {
         postList = "No posts!";
       } else {
-        postList = posts.map((post, k) =>
+        postList = posts.reverse().map((post, k) =>
           <UserPost post={post} key={k} />
         );
         console.log(postList);
@@ -68,9 +68,6 @@ class NewsFeed extends Component {
             <NewPost/>
           <List>
             {postList}
-             <UserPost/>
-             <UserPost/>
-             <UserPost/>
              </List>
           </Container>
         </div>

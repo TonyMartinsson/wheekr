@@ -7,7 +7,17 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import profilepic from '../assets/profilepic.png';
 
-export default function UserPost() {
+export default function UserPost(props) {
+  console.log(props.post);
+  const publishDate = new Date(props.post.timestamp);
+  let month = (publishDate.getMonth() + 1);
+  if (month < 10) {
+    month = '0' + month;}
+  const year = publishDate.getFullYear();
+  let date = publishDate.getDate();
+  if (date < 10) {
+    date = '0' + date;}
+
   return (
     <div style={postContainer}>
       <div style={avatarContainer}>
@@ -15,8 +25,8 @@ export default function UserPost() {
       </div>
       <div>
         <div style={{ display: 'flex' }}>
-          <p style={{ margin: '1rem' }}>Username</p>
-          <p style={{ margin: '1rem' }}>Timestamp</p>
+          <p style={{ margin: '1rem' }}>{props.post.user}</p>
+          <p style={{ margin: '1rem' }}>{year + "-" + month + "-" + date}</p>
           <IconButton edge="end" aria-label="edit">
             <EditIcon />
           </IconButton>
@@ -26,7 +36,7 @@ export default function UserPost() {
         </div>
         <ListItem alignItems="center">
           <ListItemText
-            secondary="Lorem ipsum dolor, sit amet consectetur adipisicing elit. In facere officiis quae ullam minus eum rem aliquam libero quisquam eius, expedita molestiae praesentium alias exercitationem iusto sunt saepe quis, voluptatum voluptatibus harum. Nulla, maxime consequatur! Ipsa, illo. Asperiores voluptas nostrum maiores esse rerum nihil minima, praesentium exercitationem quasi culpa magnam, amet, distinctio aut mollitia veniam pariatur sint corporis! Aliquam, assumenda. Dolorum excepturi sapiente, provident fuga maiores, quam vero alias tenetur iusto odio officia quia atque id. Veritatis dolorum similique error, commodi eum nihil quo ad magnam et quas itaque, dolor adipisci aliquid modi assumenda accusantium. Omnis alias officia numquam delectus."
+            secondary={props.post.message}
           />
         </ListItem>
         <Divider style={{ margin: '1rem' }} component="li" />
