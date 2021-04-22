@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
     user: { type: String, required: true },
-    text: String,
+    message: String,
     timestamp: Date
 });
 
