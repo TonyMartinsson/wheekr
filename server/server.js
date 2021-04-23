@@ -14,11 +14,12 @@ app.use(cookieSession({
     name: 'session',
     secret: 'aVeryS3cr3tK3y',
     secure: false,
-    maxAge: 1000 * 60,
+    maxAge: 1000 * 600,
     httpOnly: true
 }));
 
 app.use(userRouter, postRouter);
+
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).json(err.message)

@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import profilepic from '../assets/profilepic.png';
 
 export default function UserPost(props) {
-  console.log(props.post);
   const publishDate = new Date(props.post.timestamp);
   let month = (publishDate.getMonth() + 1);
   if (month < 10) {

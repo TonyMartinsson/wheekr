@@ -48,16 +48,13 @@ class NewsFeed extends Component {
   
     render() {
       const posts = this.state.posts;
-      console.log("PrintBook: " + posts);
       let postList;
-  
       if(!posts) {
         postList = "No posts!";
       } else {
         postList = posts.reverse().map((post, k) =>
           <UserPost post={post} key={k} />
         );
-        console.log(postList);
       } 
     
 
@@ -66,9 +63,9 @@ class NewsFeed extends Component {
         <div>
           <Container maxWidth="md">
             <NewPost/>
-          <List>
-            {postList}
-             </List>
+            <List>
+              {postList}
+            </List>
           </Container>
         </div>
       );

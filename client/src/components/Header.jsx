@@ -1,6 +1,5 @@
 import React from 'react';
 import ProfileCard from './ProfileCard';
-// import Button from '@material-ui/core/Button';
 import logo from '../assets/wheekrlogo.png';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -10,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -32,7 +32,9 @@ function Header() {
     const classes = useStyles();
     const [openLogin, setOpenLogin] = React.useState(false);
     const [openSignup, setOpenSignup] = React.useState(false);
-    
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
     const handleLoginClose = () => {
         setOpenLogin(false);
     };
@@ -49,11 +51,59 @@ function Header() {
         setOpenSignup(true);
     }
 
+    const signup = ()=> {
+      const newUser = {
+        username: username,
+        password: password
+      }
+      console.log(newUser)
+      axios
+        .post('http://localhost:3000/api/users/register', newUser)
+        .then(res => {
+          console.log(res)
+          setPassword('')
+          setUsername('')
+          setOpenSignup(false);
+          })
+
+    }
+
     const login = ()=> {
+      const user = {
+        username: username,
+        password: password
+      }
+      console.log(user)
+      axios
+        .post('http://localhost:3000/api/users/login', user)
+        .then(res => {
+          console.log(res)
+          setPassword('')
+          setUsername('')
+          setOpenLogin(false);
+          localStorage.setItem('LoggedInUser', JSON.stringify(user.username))
+          })
       // hämta värden från inputfält
       // fetch
       // spara inloggad användare i LS
-      
+    }
+
+    const handleSignupUsername = (e) => {
+      setUsername(e.target.value)
+      console.log(username)
+    }
+    const handleSignupPassword = (e) => {
+      setPassword(e.target.value)
+      console.log(password)
+    }
+
+    const handleLoginUsername = (e) => {
+      setUsername(e.target.value)
+      console.log(username)
+    }
+    const handleLoginPassword = (e) => {
+      setPassword(e.target.value)
+      console.log(password)
     }
     
     return (
@@ -75,14 +125,17 @@ function Header() {
                 id="name"
                 label="Username"
                 type="text"
+                onChange={handleLoginUsername}
+                defaultValue={username}
                 fullWidth
               />
               <TextField
                 margin="dense"
                 id="password"
                 label="Password"
-                multiline
                 type="password"
+                onChange={handleLoginPassword}
+                defaultValue={password}
                 fullWidth
               />
             </DialogContent>
@@ -90,7 +143,7 @@ function Header() {
               <Button onClick={handleLoginClose} color="primary">
                 Go back
                   </Button>
-              <Button disabled variant="contained" color="primary">
+              <Button onClick={login} variant="contained" color="primary">
                 Submit
                   </Button>
             </DialogActions>
@@ -105,6 +158,8 @@ function Header() {
                 id="name"
                 label="Username"
                 type="text"
+                value={username}
+                onChange={handleSignupUsername}
                 fullWidth
               />
               <TextField
@@ -113,6 +168,8 @@ function Header() {
                 label="Password"
                 multiline
                 type="password"
+                onChange={handleSignupPassword}
+                value={password}
                 fullWidth
               />
             </DialogContent>
@@ -120,7 +177,7 @@ function Header() {
               <Button onClick={handleSignupClose} color="primary">
                 Go back
                   </Button>
-              <Button onClick={login} variant="contained" color="primary">
+              <Button onClick={signup} variant="contained" color="primary">
                 Register
                   </Button>
             </DialogActions>
