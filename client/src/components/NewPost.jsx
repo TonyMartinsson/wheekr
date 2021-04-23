@@ -22,7 +22,6 @@ export default function NewPost(props) {
     
     const handleWheek = () => {
       const user = localStorage.getItem('LoggedInUser')
-      console.log(user) 
       const newWheek = {
         user: user,
         message: wheek

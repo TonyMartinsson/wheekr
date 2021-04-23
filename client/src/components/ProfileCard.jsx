@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import profilepic from '../assets/profilepic.png';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import UserContext from './contexts/UserContext'
 
-const user = document.cookie;
-let username = '';
-if (user) {
-    username = localStorage.getItem('LoggedInUser')
-}
 function ProfileCard() {  
+    const user = useContext(UserContext)
     const logout = () => {
         axios
           .post('http://localhost:3000/api/users/logout')
@@ -22,7 +19,7 @@ function ProfileCard() {
         <div style={profileContainer}>
                 <div style={userNameStyle}>
                     <img style={profileStyle} src={profilepic} alt="profile pic" />
-                    <p style={{color:'white'}}>{username}</p>
+                    <p style={{color:'white'}}>{user.name}</p>
                     <Button size="small" variant="contained" style={buttonStyle} onClick={logout}>LOG OUT</Button>
                 </div>
         </div>

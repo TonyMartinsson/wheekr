@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react'
+import UserContext from './contexts/UserContext'
 import ProfileCard from './ProfileCard';
 import logo from '../assets/wheekrlogo.png';
 import Dialog from '@material-ui/core/Dialog';
@@ -34,7 +35,7 @@ function Header() {
     const [openSignup, setOpenSignup] = React.useState(false);
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
-
+    const user = useContext(UserContext)
     const handleLoginClose = () => {
         setOpenLogin(false);
     };
@@ -64,7 +65,7 @@ function Header() {
           setPassword('')
           setUsername('')
           setOpenSignup(false);
-          })
+      })
 
     }
 
@@ -82,10 +83,7 @@ function Header() {
           setUsername('')
           setOpenLogin(false);
           localStorage.setItem('LoggedInUser', user.username)
-          })
-      // hämta värden från inputfält
-      // fetch
-      // spara inloggad användare i LS
+      })
     }
 
     const handleSignupUsername = (e) => {
@@ -111,6 +109,7 @@ function Header() {
         <Link to="/" >
           <img style={logoStyle} className={classes.logoSize} src={logo} alt="Logo" />
         </Link>
+        {!user.loggedIn? (
         <div style={buttonContainer}>
 
             <Button size="medium" variant="contained" style={buttonStyle} onClick={openLoginModal}>LOGIN</Button>
@@ -182,8 +181,8 @@ function Header() {
             </DialogActions>
           </Dialog>
 
-        </div>
-        <ProfileCard />
+        </div> ):( 
+        <ProfileCard />)}
       </div>
     )
 }

@@ -1,29 +1,10 @@
 import React, { Component } from 'react';
 import { Container } from '@material-ui/core';
-//import { makeStyles, createStyles} from '@material-ui/core/styles';
 import UserPost from './UserPost';
 import List from '@material-ui/core/List';
 import NewPost from './NewPost';
 import axios from 'axios';
-
-
-// const useStyles = makeStyles((theme) =>
-//   createStyles({
-//     root: {
-//       flexGrow: 1,
-//     },
-//     paper: {
-//       padding: theme.spacing(2),
-//       textAlign: 'center',
-//       color: theme.palette.text.secondary,
-//     },
-//     item: {
-//       display: 'flex',
-//       justifyContent: 'center'
-//     }
-//   }),
-// );
-
+import UserContext from './contexts/UserContext'
 class NewsFeed extends Component { 
     constructor(props) {
       super(props);
@@ -31,6 +12,7 @@ class NewsFeed extends Component {
         posts: []
       };
     }
+    static contextType = UserContext
   
     componentDidMount() {
       axios
@@ -39,17 +21,18 @@ class NewsFeed extends Component {
           this.setState({
             posts: res.data
           })
-        })
+      })
         .catch(err =>{
           console.log('Error');
         })
-
     };
+
     reload = () => {  
     this.componentDidMount();
     };
    
     render() {
+      let user = this.context
       const posts = this.state.posts;
       let postList;
       if(!posts) {
@@ -62,8 +45,10 @@ class NewsFeed extends Component {
     
     return (
         <div>
-          <Container maxWidth="md">
+          <Container maxWidth="md">            
+            {user.loggedIn? (
             <NewPost reload = {this.reload}/>
+            ):(<p>Please login to wheek!</p>)} 
             <List>
               {postList}
             </List>
