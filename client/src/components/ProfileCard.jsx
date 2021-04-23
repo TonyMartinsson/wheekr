@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import profilepic from '../assets/profilepic.png';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
+const user = document.cookie;
+let username = '';
+if (user) {
+    username = localStorage.getItem('LoggedInUser')
+}
 function ProfileCard() {  
-    useEffect(() => { 
-        
-    });
-
     const logout = () => {
         axios
           .post('http://localhost:3000/api/users/logout')
@@ -17,11 +18,11 @@ function ProfileCard() {
             console.log('LS removed')
             })
       }
-    return (
+    return (   
         <div style={profileContainer}>
                 <div style={userNameStyle}>
                     <img style={profileStyle} src={profilepic} alt="profile pic" />
-                    <p style={{color:'white'}}>USERNAME</p>
+                    <p style={{color:'white'}}>{username}</p>
                     <Button size="small" variant="contained" style={buttonStyle} onClick={logout}>LOG OUT</Button>
                 </div>
         </div>
