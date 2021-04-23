@@ -166,7 +166,6 @@ function Header() {
                 margin="dense"
                 id="password"
                 label="Password"
-                multiline
                 type="password"
                 onChange={handleSignupPassword}
                 value={password}

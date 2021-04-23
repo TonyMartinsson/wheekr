@@ -43,9 +43,12 @@ class NewsFeed extends Component {
         .catch(err =>{
           console.log('Error');
         })
+
     };
-  
-  
+    reload = () => {  
+    this.componentDidMount();
+    };
+   
     render() {
       const posts = this.state.posts;
       let postList;
@@ -57,12 +60,10 @@ class NewsFeed extends Component {
         );
       } 
     
-
-
     return (
         <div>
           <Container maxWidth="md">
-            <NewPost/>
+            <NewPost reload = {this.reload}/>
             <List>
               {postList}
             </List>
