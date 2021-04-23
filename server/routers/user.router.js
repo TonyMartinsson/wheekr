@@ -37,7 +37,9 @@ router.post('/api/users/login', async (req, res) => {
 
     //create session
     req.session.loggedInUser = user._id
+    req.session.username = user.username
     req.session.role = user.access
+    console.log(req.session.username)
     console.log(req.session.loggedInUser)
     res.status(204).json(user);
 });

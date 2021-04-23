@@ -81,7 +81,7 @@ function Header() {
           setPassword('')
           setUsername('')
           setOpenLogin(false);
-          localStorage.setItem('LoggedInUser', JSON.stringify(user.username))
+          localStorage.setItem('LoggedInUser', user.username)
           })
       // hämta värden från inputfält
       // fetch
