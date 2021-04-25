@@ -32,3 +32,15 @@ Content-Type: application/json
     "username": "Lisa",
     "password": "jagtyckerommarsvin"
 }
+
+###
+
+DELETE http://localhost:4000/api/posts
+Content-Type: application/json
+
+{
+    "_id": "60813714ec98955aac2a5811",
+    "user": "Tony",
+    "message": "Jag vill ha nya gitarrer och mer kaffe!!!!!"
+}
+
