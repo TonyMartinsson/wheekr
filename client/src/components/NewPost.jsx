@@ -26,7 +26,6 @@ export default function NewPost(props) {
         user: user,
         message: wheek
       }
-      console.log(newWheek)
       axios
         .post('http://localhost:3000/api/posts', newWheek)
         .then(res => {
