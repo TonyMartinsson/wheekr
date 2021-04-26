@@ -6,17 +6,19 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 
 function UserCard(props) {
+    const { username, access, _id } = props.user
     const deleteUser = () => {
         axios
-          .delete(`/api/users/${props.user._id}`)
+          .delete(`/api/users/${_id}`)
           .then(res => {
             console.log(res)
           })
           .catch(err => {
             console.error(err)
-          })      
+          })   
+    props.reload()   
     }
-    const { username, access } = props.user
+
 
     return(
         <div>

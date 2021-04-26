@@ -37,7 +37,10 @@ class UserAdministration extends Component {
           })
 
     };
-
+    reload = () => {  
+        this.componentDidMount();
+        };
+        
     render() {
         console.log(this.state.users)
         const users = this.state.users;

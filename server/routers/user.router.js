@@ -8,9 +8,14 @@ router.get('/api/users', checkAccess, async (req, res) => {
     res.status(200).json(users);
 });
 
+router.delete('/api/users/:id', checkAccess, async (req, res) => {
+    const deletedUser = await UserModel.deleteOne({ _id: req.params.id });
+       res.status(200).json(deletedUser);
+    
+});
+
 function checkAccess(req, res, next) {
     if(req.session.role === "admin") {
-        console.log("admin")
         next()   
     }
     else {
@@ -49,8 +54,6 @@ router.post('/api/users/login', async (req, res) => {
     req.session.loggedInUser = user._id
     req.session.username = user.username
     req.session.role = user.access
-    console.log(req.session.username)
-    console.log(req.session.loggedInUser)
     res.status(204).json(user);
 });
 
