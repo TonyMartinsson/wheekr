@@ -3,10 +3,31 @@ const UserModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 
-router.get('/api/users', async (req, res) => {
+router.get('/api/users', checkAccess, async (req, res) => {
     const users = await UserModel.find({});
     res.status(200).json(users);
 });
+
+function checkLogin (req, res, next) {
+    if(req.session.loggedInUser) {
+        next()
+    }
+    else {
+        res.status(401).json("You must login first!")
+    }
+}
+
+function checkAccess(role) {
+    return[checkLogin, (req, res, next) => {
+        if(req.session.role === role) {
+            next()   
+        }
+        else {
+            res.status(403).json("You are not authorized to access this route.")
+        }
+
+    }]
+}
 
 router.post('/api/users/register', async (req, res) => {
     const { username, password } = req.body;

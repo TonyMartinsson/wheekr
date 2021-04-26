@@ -1,5 +1,4 @@
 const express = require('express');
-const { db } = require('../models/post.model');
 const PostModel = require('../models/post.model');
 const router = express.Router();
 
@@ -9,7 +8,7 @@ router.get('/api/posts', async (req, res) => {
 });
 
 router.delete('/api/posts/:id', async (req, res) => {
-    console.log('PARAMS', req.params);
+
     const deletedPost = await PostModel.deleteOne({ _id: req.params.id });
     if (deletedPost.deletedCount == 0)
     {
