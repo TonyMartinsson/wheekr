@@ -39,7 +39,7 @@ class NewsFeed extends Component {
         postList = "No posts!";
       } else {
         postList = posts.reverse().map((post, k) =>
-          <UserPost post={post} key={k} />
+          <UserPost post={post} key={k} reload = {this.reload}/>
         );
       } 
     
