@@ -31,14 +31,13 @@ export default function UserPost(props) {
   const user = useContext(UserContext)
 
   const deletePost = () => {
-    const postToDelete = {
-      _id: props.post._id
-    }
-    console.log(postToDelete)
       axios
-        .delete('/api/posts/', postToDelete)
+        .delete(`/api/posts/${props.post._id}`)
         .then(res => {
           console.log(res)
+        })
+        .catch(err => {
+          console.error(err)
         })      
   }
 
