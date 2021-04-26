@@ -6,6 +6,11 @@ import UserContext from './contexts/UserContext'
 
 function ProfileCard() {  
     const user = useContext(UserContext)
+
+    function refreshPage() {
+        window.location.reload();
+    }
+
     const logout = () => {
         axios
           .post('http://localhost:3000/api/users/logout')
@@ -13,8 +18,9 @@ function ProfileCard() {
             console.log(res)
             localStorage.removeItem('LoggedInUser')
             console.log('LS removed')
+            refreshPage();
             })
-      }
+    }
     return (   
         <div style={profileContainer}>
                 <div style={userNameStyle}>

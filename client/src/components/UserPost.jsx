@@ -8,6 +8,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import profilepic from '../assets/profilepic.png';
 import axios from 'axios';
+import '../css/userpost.css';
 
 export default function UserPost(props) {
   const publishDate = new Date(props.post.timestamp);
@@ -23,13 +24,11 @@ export default function UserPost(props) {
 
   const deletePost = () => {
     const postToDelete = {
-      _id: props.post._id,
-      user: props.post.user,
-      message: props.post.message
+      _id: props.post._id
     }
     console.log(postToDelete)
       axios
-        .delete('http://localhost:3000/api/posts/', postToDelete)
+        .delete('/api/posts/', postToDelete)
         .then(res => {
           console.log(res)
         })      
@@ -38,15 +37,14 @@ export default function UserPost(props) {
   }
 
   return (
-    <div style={postContainer}>
-      <div style={avatarContainer}>
-        <img sty
-        le={avatar} src={profilepic} alt="profile pic" />
+    <div className="postContainer">
+      <div className="avatarContainer">
+        <img className="avatar" src={profilepic} alt="profile pic" />
       </div>
       <div>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <p style={{ margin: '1rem' }}>{props.post.user}</p>
-          <p style={{ margin: '1rem' }}>{year + "-" + month + "-" + date}</p>
+          <p style={{ margin: '1rem', marginRight: '3rem' }}>{year + "-" + month + "-" + date}</p>
 
           { user.name === props.post.user ? (
             <>
@@ -67,19 +65,4 @@ export default function UserPost(props) {
       </div>
     </div>
   );
-}
-
-const postContainer = {
-  display: 'flex'
-}
-
-const avatarContainer = {
-  display: 'flex',
-  alignItems: 'flex-start'
-}
-const avatar = {
-  display: 'flex',
-  width: '4rem',
-  borderRadius: '50%',
-  margin: '0.5rem'
 }
