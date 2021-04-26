@@ -1,7 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
-const bcrypt = require('bcrypt');
 require('express-async-errors');
 const postRouter = require('./routers/post.router');
 const userRouter = require('./routers/user.router');

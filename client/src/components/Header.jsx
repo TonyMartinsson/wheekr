@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react'
+import UserContext from './contexts/UserContext'
 import ProfileCard from './ProfileCard';
 import logo from '../assets/wheekrlogo.png';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,34 +8,16 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    logoSize: {
-      padding: theme.spacing(1),
-      [theme.breakpoints.down('xs')]: {
-        transform: 'scale(0.5)',
-      },
-      [theme.breakpoints.up('sm')]: {
-        transform: 'scale(0.75)',
-      },
-      [theme.breakpoints.up('md')]: {
-        transform: 'scale(1.0)',
-      },
-    },
-  }),
-);
+import '../css/header.css';
 
 function Header() { 
-    const classes = useStyles();
     const [openLogin, setOpenLogin] = React.useState(false);
     const [openSignup, setOpenSignup] = React.useState(false);
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
-
+    const user = useContext(UserContext)
     const handleLoginClose = () => {
         setOpenLogin(false);
     };
@@ -64,7 +47,9 @@ function Header() {
           setPassword('')
           setUsername('')
           setOpenSignup(false);
-          })
+          refreshPage();
+          alert('New user created!');
+      })
 
     }
 
@@ -82,10 +67,8 @@ function Header() {
           setUsername('')
           setOpenLogin(false);
           localStorage.setItem('LoggedInUser', user.username)
-          })
-      // hämta värden från inputfält
-      // fetch
-      // spara inloggad användare i LS
+          refreshPage();
+      })
     }
 
     const handleSignupUsername = (e) => {
@@ -105,13 +88,20 @@ function Header() {
       setPassword(e.target.value)
       console.log(password)
     }
+
+    function refreshPage() {
+      window.location.reload();
+    }
     
     return (
-      <div style={headerStyle}>
+      <div className="headerContainer">
+
+      <div className="headerStyle">
         <Link to="/" >
-          <img style={logoStyle} className={classes.logoSize} src={logo} alt="Logo" />
+          <img className="logoStyle" src={logo} alt="Logo" />
         </Link>
-        <div style={buttonContainer}>
+        {!user.loggedIn? (
+          <div className="buttonContainer">
 
             <Button size="medium" variant="contained" style={buttonStyle} onClick={openLoginModal}>LOGIN</Button>
             <Button size="medium" variant="contained" style={buttonStyle} onClick={openSignupModal}>SIGNUP</Button>
@@ -128,7 +118,7 @@ function Header() {
                 onChange={handleLoginUsername}
                 defaultValue={username}
                 fullWidth
-              />
+                />
               <TextField
                 margin="dense"
                 id="password"
@@ -137,7 +127,7 @@ function Header() {
                 onChange={handleLoginPassword}
                 defaultValue={password}
                 fullWidth
-              />
+                />
             </DialogContent>
             <DialogActions>
               <Button onClick={handleLoginClose} color="primary">
@@ -161,7 +151,7 @@ function Header() {
                 value={username}
                 onChange={handleSignupUsername}
                 fullWidth
-              />
+                />
               <TextField
                 margin="dense"
                 id="password"
@@ -170,7 +160,7 @@ function Header() {
                 onChange={handleSignupPassword}
                 value={password}
                 fullWidth
-              />
+                />
             </DialogContent>
             <DialogActions>
               <Button onClick={handleSignupClose} color="primary">
@@ -182,29 +172,11 @@ function Header() {
             </DialogActions>
           </Dialog>
 
-        </div>
-        <ProfileCard />
+        </div> ):( 
+          <ProfileCard />)}
       </div>
+</div>
     )
-}
-                        
-const headerStyle = {
-    background: 'linear-gradient(90deg, rgba(1,182,8,1) 0%, rgba(9,121,17,1) 60%, rgba(6,80,8,1) 100%)',
-    height: '7rem',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-}
-
-const logoStyle = {
-    height: '5rem',
-    marginLeft: '1rem'
-}
-
-const buttonContainer = {
-    display: 'flex',
-    alignItems: 'flex-end'
 }
 
 const buttonStyle = {

@@ -1,0 +1,43 @@
+@media (min-width: 1px) {
+    .headerContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .logoStyle {
+        height: 2rem;
+        padding: 1rem;
+    }
+    .headerStyle {
+        height: 10rem;
+        background: linear-gradient(90deg, rgba(1,182,8,1) 0%, rgba(9,121,17,1) 60%, rgba(6,80,8,1) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 550px) {
+    .logoStyle {
+        height: 3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .headerContainer {
+        display: flex;
+    }
+    .logoStyle {
+        height: 5rem;
+    }
+    .headerStyle {
+        height: 7rem;
+        width: 100%;
+    }
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: flex-end;
+}

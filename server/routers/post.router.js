@@ -7,6 +7,22 @@ router.get('/api/posts', async (req, res) => {
     res.status(200).json(posts);
 });
 
+router.delete('/api/posts/', async (req, res) => {
+    const deletedPost = await PostModel.deleteOne({ _id: req.body._id });
+    if (deletedPost.deletedCount == 0)
+    {
+        res.status(418).json(deletedPost);
+    }
+    else if (deletedPost.ok != 1)
+    {
+        res.status(417).json(deletedPost);
+    }
+    else
+    {
+       res.status(200).json(deletedPost);
+    }
+});
+
 router.post('/api/posts', async (req, res) => {
     const postToSave = {
         user: req.body.user,
@@ -18,4 +34,3 @@ router.post('/api/posts', async (req, res) => {
 });
 
 module.exports = router;
-
