@@ -8,25 +8,14 @@ router.get('/api/users', checkAccess, async (req, res) => {
     res.status(200).json(users);
 });
 
-function checkLogin (req, res, next) {
-    if(req.session.loggedInUser) {
-        next()
+function checkAccess(req, res, next) {
+    if(req.session.role === "admin") {
+        console.log("admin")
+        next()   
     }
     else {
-        res.status(401).json("You must login first!")
+        res.status(403).json("You are not authorized to access this route.")
     }
-}
-
-function checkAccess(role) {
-    return[checkLogin, (req, res, next) => {
-        if(req.session.role === role) {
-            next()   
-        }
-        else {
-            res.status(403).json("You are not authorized to access this route.")
-        }
-
-    }]
 }
 
 router.post('/api/users/register', async (req, res) => {
