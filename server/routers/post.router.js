@@ -1,4 +1,5 @@
 const express = require('express');
+const { db } = require('../models/post.model');
 const PostModel = require('../models/post.model');
 const router = express.Router();
 
@@ -21,6 +22,12 @@ router.delete('/api/posts/', async (req, res) => {
     {
        res.status(200).json(deletedPost);
     }
+});
+
+router.put('/api/posts/', async (req, res) => {
+    const postToEdit = await PostModel.findOneAndUpdate({ _id: req.body._id }, {message: req.body.message});
+
+    console.log(postToEdit)
 });
 
 router.post('/api/posts', async (req, res) => {
