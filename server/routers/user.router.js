@@ -14,6 +14,11 @@ router.delete('/api/users/:id', checkAccess, async (req, res) => {
     
 });
 
+router.put('/api/users/', checkAccess, async (req, res) => {
+    const changedUser = await UserModel.updateOne({ _id: req.params.id }, {access: req.params.access});
+        res.status(200).json(changedUser);
+});
+
 function checkAccess(req, res, next) {
     if(req.session.role === "admin") {
         next()   

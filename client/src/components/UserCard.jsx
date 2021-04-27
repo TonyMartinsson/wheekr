@@ -4,6 +4,11 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 
 function UserCard(props) {
     const { username, access, _id } = props.user
@@ -15,10 +20,29 @@ function UserCard(props) {
           })
           .catch(err => {
             console.error(err)
-          })   
-    props.reload()   
-    }
+          }) 
+        props.reload()
+    }      
 
+    // const editUser = () => {
+    //     axios
+    //       .put(`/api/users/${access}`)
+    //       .then(res => {
+    //         console.log(res)
+    //       })
+    //       .catch(err => {
+    //         console.error(err)
+    //       })             
+    //     props.reload()   
+    // }
+
+    const { onRadioChange } = props
+
+    const handleRadioChange = (event) => {
+        onRadioChange(event.target.value);
+    };
+
+    console.log(access)
 
     return(
         <div>
@@ -28,7 +52,13 @@ function UserCard(props) {
                 <h4>{username}</h4>
             </Grid>
             <Grid item xs={4}>
-                <p>{access}</p>
+                {/* <p>{access}</p> */}
+                    <FormControl component="fieldset">
+                        <RadioGroup aria-label="gender" name="gender1" value={access} onChange={handleRadioChange}>
+                            <FormControlLabel value="user" control={<Radio />} label="User" />
+                            <FormControlLabel value="admin" control={<Radio />} label="Admin" />
+                        </RadioGroup>
+                    </FormControl>
             </Grid>
             <Grid item xs={4}>
                 <IconButton edge="end" aria-label="edit" onClick={deleteUser}>

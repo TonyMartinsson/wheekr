@@ -38,7 +38,8 @@ export default function UserPost(props) {
         })
         .catch(err => {
           console.error(err)
-        })      
+        })
+        props.reload()      
   }
 
   const editPost = () => {
