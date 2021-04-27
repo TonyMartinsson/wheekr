@@ -35,10 +35,11 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:4000/api/users/6087d4d4b0ea9e2e2046d5aa
+PUT http://localhost:4000/api/users/
 Content-Type: application/json
 
 {
+    "_id": "6081bbdd153b602dc09e1ad3",
     "access": "admin"
 }
 

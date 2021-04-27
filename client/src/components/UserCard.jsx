@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 
 function UserCard(props) {
     const { username, access, _id } = props.user
+    const [accessType, setAccessType] = React.useState(access);
     const deleteUser = () => {
         axios
           .delete(`/api/users/${_id}`)
@@ -24,22 +25,22 @@ function UserCard(props) {
         props.reload()
     }      
 
-    // const editUser = () => {
-    //     axios
-    //       .put(`/api/users/${access}`)
-    //       .then(res => {
-    //         console.log(res)
-    //       })
-    //       .catch(err => {
-    //         console.error(err)
-    //       })             
-    //     props.reload()   
-    // }
-
-    const { onRadioChange } = props
-
-    const handleRadioChange = (event) => {
-        onRadioChange(event.target.value);
+    const onRadioChange = (event) => {
+        setAccessType(event.target.value)
+        console.log(accessType)
+        const userToUpdate = { _id: _id, access: event.target.value }
+        console.log(userToUpdate)
+            axios
+            
+           .put('/api/users/', userToUpdate)
+           .then(res => {
+             console.log(res)
+           })
+           .catch(err => {
+             console.error(err)
+           })
+                     
+         props.reload()    
     };
 
     console.log(access)
@@ -54,7 +55,7 @@ function UserCard(props) {
             <Grid item xs={4}>
                 {/* <p>{access}</p> */}
                     <FormControl component="fieldset">
-                        <RadioGroup aria-label="gender" name="gender1" value={access} onChange={handleRadioChange}>
+                        <RadioGroup aria-label="gender" name="gender1" value={accessType} onChange={onRadioChange}>
                             <FormControlLabel value="user" control={<Radio />} label="User" />
                             <FormControlLabel value="admin" control={<Radio />} label="Admin" />
                         </RadioGroup>

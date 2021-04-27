@@ -30,7 +30,6 @@ class UserAdministration extends Component {
             this.setState({
               users: res.data
             });
-            console.log(res.data)
         })
           .catch(err =>{
             console.log('Error');
@@ -42,7 +41,6 @@ class UserAdministration extends Component {
         };
         
     render() {
-        console.log(this.state.users)
         const users = this.state.users;
         const userList = users.map((user, k) =>
             <UserCard user={user} key={k} reload = {this.reload}/>
