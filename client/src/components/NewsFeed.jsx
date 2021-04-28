@@ -19,7 +19,7 @@ class NewsFeed extends Component {
         .get('/api/posts')
         .then(res => {
           this.setState({
-            posts: res.data
+            posts: res.data.reverse()
           })
       })
         .catch(err =>{
