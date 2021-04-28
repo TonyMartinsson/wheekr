@@ -43,7 +43,7 @@ function UserCard(props) {
          props.reload()    
     };
 
-    console.log(access)
+    // console.log(access)
 
     return(
         <div>

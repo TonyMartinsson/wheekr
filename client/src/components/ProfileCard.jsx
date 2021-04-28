@@ -24,23 +24,36 @@ function ProfileCard() {
             })
     }
 
-    axios
-    .get(`/api/users/${user.name}`)
-    .then(res => {
-        console.log(res.data)
-    })
-      .catch(err =>{
-        console.log('Error');
-    })
+        let accessType =    
+        axios
+        .get(`/api/users/${user.name}`)
+        .then(res => {
+            accessType = res.data
+            return accessType
+        })
+        .catch(err =>{
+            console.log('Error');
+        })
+
 
     return (   
+
         <div style={profileContainer}>
                 <div style={userNameStyle}>
                     <img style={profileStyle} src={profilepic} alt="profile pic" />
                     <p style={{color:'white'}}>{user.name}</p>
+
+                    { accessType === "admin" ? (
+                    
+                    <div></div>
+
+                    ) : (
                     <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
                         <SettingsIcon />
                     </Link>
+                    )}
+
+
                     <Button size="small" variant="contained" style={buttonStyle} onClick={logout}>LOG OUT</Button>
                 </div>
         </div>
