@@ -3,10 +3,35 @@ const UserModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 
-router.get('/api/users', async (req, res) => {
+router.get('/api/users', checkAccess, async (req, res) => {
     const users = await UserModel.find({});
     res.status(200).json(users);
 });
+
+router.get('/api/users/:username', async (req, res) => {
+    const user = await UserModel.findOne({ username: req.params.username});
+    res.status(200).json(user.access);
+    
+});
+
+router.delete('/api/users/:id', checkAccess, async (req, res) => {
+    const deletedUser = await UserModel.deleteOne({ _id: req.params.id });
+       res.status(200).json(deletedUser);    
+});
+
+router.put('/api/users/', async (req, res) => {
+    const changedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {access: req.body.access});
+    res.status(200).json(changedUser);
+});
+
+function checkAccess(req, res, next) {
+    if(req.session.role === "admin") {
+        next()   
+    }
+    else {
+        res.status(403).json("You are not authorized to access this route.")
+    }
+}
 
 router.post('/api/users/register', async (req, res) => {
     const { username, password } = req.body;
@@ -39,8 +64,6 @@ router.post('/api/users/login', async (req, res) => {
     req.session.loggedInUser = user._id
     req.session.username = user.username
     req.session.role = user.access
-    console.log(req.session.username)
-    console.log(req.session.loggedInUser)
     res.status(204).json(user);
 });
 

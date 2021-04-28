@@ -1,5 +1,4 @@
 const express = require('express');
-const { db } = require('../models/post.model');
 const PostModel = require('../models/post.model');
 const router = express.Router();
 
@@ -8,8 +7,22 @@ router.get('/api/posts', async (req, res) => {
     res.status(200).json(posts);
 });
 
+router.get('/api/posts/adminaccess', checkAccess, async (req, res) => {
+    const posts = await PostModel.find({});
+    res.status(200).json(posts);
+});
+
+function checkAccess(req, res, next) {
+    if(req.session.role === "admin") {
+        next()   
+    }
+    else {
+        res.status(403).json("You are not authorized to access this route.")
+    }
+}
+
 router.delete('/api/posts/:id', async (req, res) => {
-    console.log('PARAMS', req.params);
+
     const deletedPost = await PostModel.deleteOne({ _id: req.params.id });
     if (deletedPost.deletedCount == 0)
     {
@@ -28,7 +41,7 @@ router.delete('/api/posts/:id', async (req, res) => {
 router.put('/api/posts/', async (req, res) => {
     const postToEdit = await PostModel.findOneAndUpdate({ _id: req.body._id }, {message: req.body.message});
 
-    console.log(postToEdit)
+    // console.log(postToEdit)
 });
 
 router.post('/api/posts', async (req, res) => {

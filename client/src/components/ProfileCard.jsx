@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import profilepic from '../assets/profilepic.png';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import UserContext from './contexts/UserContext'
+import UserContext from './contexts/UserContext';
+import SettingsIcon from '@material-ui/icons/Settings';
+import { Link } from "react-router-dom";
 
 function ProfileCard() {  
     const user = useContext(UserContext)
@@ -21,11 +23,37 @@ function ProfileCard() {
             refreshPage();
             })
     }
+
+        let accessType =    
+        axios
+        .get(`/api/users/${user.name}`)
+        .then(res => {
+            accessType = res.data
+            return accessType
+        })
+        .catch(err =>{
+            console.log('Error');
+        })
+
+
     return (   
+
         <div style={profileContainer}>
                 <div style={userNameStyle}>
                     <img style={profileStyle} src={profilepic} alt="profile pic" />
                     <p style={{color:'white'}}>{user.name}</p>
+
+                    { accessType === "admin" ? (
+                    
+                    <div></div>
+
+                    ) : (
+                    <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
+                        <SettingsIcon />
+                    </Link>
+                    )}
+
+
                     <Button size="small" variant="contained" style={buttonStyle} onClick={logout}>LOG OUT</Button>
                 </div>
         </div>

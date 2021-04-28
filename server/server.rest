@@ -1,3 +1,14 @@
+POST http://localhost:4000/api/users/register
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "1234",
+    "access": "admin"
+}
+
+###
+
 GET http://localhost:4000/api/posts
 
 ###
@@ -14,14 +25,7 @@ Content-Type: application/json
 GET http://localhost:4000/api/users
 
 ###
-
-POST http://localhost:4000/api/users/register
-Content-Type: application/json
-
-{
-    "username": "Lisa",
-    "password": "jagtyckerommarsvin"
-}
+GET http://localhost:4000/api/users/
 
 ###
 
@@ -29,8 +33,17 @@ POST http://localhost:4000/api/users/login
 Content-Type: application/json
 
 {
-    "username": "Lisa",
-    "password": "jagtyckerommarsvin"
+    "username": "admin",
+    "password": "1234"
+}
+
+###
+PUT http://localhost:4000/api/users/
+Content-Type: application/json
+
+{
+    "_id": "6081bbdd153b602dc09e1ad3",
+    "access": "admin"
 }
 
 ###

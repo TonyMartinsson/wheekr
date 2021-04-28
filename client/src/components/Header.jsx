@@ -67,6 +67,7 @@ function Header() {
           setUsername('')
           setOpenLogin(false);
           localStorage.setItem('LoggedInUser', user.username)
+          localStorage.setItem('AccessType', user.access)
           refreshPage();
       })
     }

@@ -13,7 +13,8 @@ function App() {
     loggedIn = true;
   }
 
-  const user = { name: username, loggedIn: loggedIn }
+
+  const user = { name: username, loggedIn: loggedIn}
   return (
     <UserProvider value={user}>
       <Router>

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NewsFeed from './NewsFeed';
+import UserAdministration from './UserAdministration';
 
 function Main() {   
     return (
@@ -9,10 +10,7 @@ function Main() {
             <Route exact path="/">
                 <NewsFeed />
             </Route>
-            {/* <Route path="/kundvagn" component={Cart} />
-            <Route path="/crud" component={CrudPage} />
-            <Route path="/checkout" component={Checkout} />
-            <Route path="/produkt/:url" component={ProductDetail} /> */}
+            <Route path="/admin" component={UserAdministration} />
         </Switch>
     )    
 }

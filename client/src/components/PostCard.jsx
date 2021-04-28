@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import UserContext from './contexts/UserContext'
+import React from 'react'
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -28,7 +27,6 @@ export default function UserPost(props) {
   if (date < 10) {
     date = '0' + date;
   }
-  const user = useContext(UserContext)
 
   const deletePost = () => {
       axios
@@ -79,23 +77,19 @@ export default function UserPost(props) {
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <p style={{ margin: '1rem' }}>{props.post.user}</p>
           <p style={{ margin: '1rem', marginRight: '3rem' }}>{year + "-" + month + "-" + date}</p>
-
-          { user.name === props.post.user ? (
-            <>
           <IconButton edge="end" aria-label="edit" onClick={openEditModal}>
             <EditIcon />
           </IconButton>
           <IconButton edge="end" aria-label="delete" onClick={deletePost}>
             <DeleteIcon />
-          </IconButton> </>) : (<p></p>)}
-          
+          </IconButton>          
         </div>
         <ListItem alignItems="center">
           <ListItemText
             secondary={props.post.message}
           />
         </ListItem>
-        <Divider style={{ margin: '1rem' }} component="li" />
+        <Divider style={{ margin: '1rem' }}/>
       </div>
 
       <Dialog open={openEdit} onClose={handleEditClose} aria-labelledby="form-dialog-login">
