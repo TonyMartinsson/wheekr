@@ -23,6 +23,16 @@ function ProfileCard() {
             refreshPage();
             })
     }
+
+    axios
+    .get(`/api/users/${user.name}`)
+    .then(res => {
+        console.log(res.data)
+    })
+      .catch(err =>{
+        console.log('Error');
+    })
+
     return (   
         <div style={profileContainer}>
                 <div style={userNameStyle}>

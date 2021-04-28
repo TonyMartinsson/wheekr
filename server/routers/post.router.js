@@ -27,7 +27,7 @@ router.delete('/api/posts/:id', async (req, res) => {
 router.put('/api/posts/', async (req, res) => {
     const postToEdit = await PostModel.findOneAndUpdate({ _id: req.body._id }, {message: req.body.message});
 
-    console.log(postToEdit)
+    // console.log(postToEdit)
 });
 
 router.post('/api/posts', async (req, res) => {

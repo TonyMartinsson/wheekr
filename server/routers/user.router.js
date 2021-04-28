@@ -8,15 +8,21 @@ router.get('/api/users', checkAccess, async (req, res) => {
     res.status(200).json(users);
 });
 
+router.get('/api/users/:username', async (req, res) => {
+    const user = await UserModel.findOne({ username: req.params.username});
+    console.log(user);
+    res.status(200).json(user.access);
+    
+});
+
 router.delete('/api/users/:id', checkAccess, async (req, res) => {
     const deletedUser = await UserModel.deleteOne({ _id: req.params.id });
-       res.status(200).json(deletedUser);
-    
+       res.status(200).json(deletedUser);    
 });
 
 router.put('/api/users/', async (req, res) => {
     const changedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {access: req.body.access});
-    console.log(req.body.access) 
+    // console.log(req.body.access) 
     res.status(200).json(changedUser);
 });
 

@@ -55,7 +55,7 @@ function UserCard(props) {
             <Grid item xs={4}>
                 {/* <p>{access}</p> */}
                     <FormControl component="fieldset">
-                        <RadioGroup aria-label="gender" name="gender1" value={accessType} onChange={onRadioChange}>
+                        <RadioGroup aria-label="toggle-access" name="toggle-access" value={accessType} onChange={onRadioChange}>
                             <FormControlLabel value="user" control={<Radio />} label="User" />
                             <FormControlLabel value="admin" control={<Radio />} label="Admin" />
                         </RadioGroup>
