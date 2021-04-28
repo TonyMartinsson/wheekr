@@ -1,9 +1,6 @@
 import React, { useContext } from 'react'
 import UserContext from './contexts/UserContext'
 import ProfileCard from './ProfileCard';
-import avatar1 from '../assets/avatar1.jpg'
-import avatar2 from '../assets/avatar2.jpg'
-import avatar3 from '../assets/avatar3.jpg'
 import logo from '../assets/wheekrlogo.png';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -173,19 +170,19 @@ function Header() {
                     value="avatar1" 
                     control={<Radio />} 
                     labelPlacement="top"
-                    label={<img src={avatar1} className='avatar' alt='fluffy guinea pig'/>} 
+                    label={<img src={'../avatar/avatar1.jpg'} className='avatar' alt='fluffy guinea pig'/>} 
                   />
                   <FormControlLabel 
                     value="avatar2" 
                     control={<Radio />} 
                     labelPlacement="top"
-                    label={<img src={avatar2} className='avatar' alt='fluffy guinea pig'/>} 
+                    label={<img src={'../avatar/avatar2.jpg'} className='avatar' alt='fluffy guinea pig'/>} 
                   />
                   <FormControlLabel 
                     value="avatar3" 
                     control={<Radio />} 
                     labelPlacement="top"
-                    label={<img src={avatar3} className='avatar' alt='fluffy guinea pig'/>} 
+                    label={<img src={'../avatar/avatar3.jpg'} className='avatar' alt='fluffy guinea pig'/>} 
                   />
                 </RadioGroup>
               </FormControl>
