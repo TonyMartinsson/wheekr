@@ -36,7 +36,7 @@ function checkLogin(req, res, next) {
 }
 
 router.post('/api/users/register', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, avatar } = req.body;
 
     // check if user exists
     const existingUser = await UserModel.findOne({username: username});
@@ -48,6 +48,7 @@ router.post('/api/users/register', async (req, res) => {
     const userToSave = {
         username: username,
         password: hashedPassword,
+        avatar: avatar,
         access: "user"
     }
     const newUser = await UserModel.create(userToSave);
@@ -58,7 +59,8 @@ router.post('/api/users/register', async (req, res) => {
 router.get('/api/users/authenticate', checkLogin, (req, res) => {
     res.status(200).json({
         username: req.session.username,
-        access: req.session.role
+        access: req.session.role,
+        avatar: req.session.avatar
     })
 })
 
@@ -73,6 +75,7 @@ router.post('/api/users/login', async (req, res) => {
     //create session
     req.session.username = user.username
     req.session.role = user.access
+    req.session.avatar = user.avatar
     res.status(200).json(user);
 });
 

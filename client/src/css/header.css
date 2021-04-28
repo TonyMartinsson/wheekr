@@ -16,6 +16,9 @@
         width: 100%;
         flex-wrap: wrap;
     }
+    .avatar {
+        width: 5rem;
+    }
 }
 
 @media (min-width: 550px) {

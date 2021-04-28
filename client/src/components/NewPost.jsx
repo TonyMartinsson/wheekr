@@ -26,6 +26,7 @@ export default function NewPost(props) {
     const handleWheek = () => {
       const newWheek = {
         user: user.username,
+        avatar: user.avatar,
         message: wheek
       }
       axios
