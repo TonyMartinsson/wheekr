@@ -12,13 +12,11 @@ function App() {
   axios
   .get('/api/users/authenticate')
   .then(({ data: user }) => {
-    console.log(user)
-    
     setUser(user)
     
   })
   .catch(err =>{
-    console.log('Error');
+    console.log('No user is logged in');
     setUser()
   })
 

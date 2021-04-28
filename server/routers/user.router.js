@@ -8,12 +8,6 @@ router.get('/api/users', checkAccess, async (req, res) => {
     res.status(200).json(users);
 });
 
-// router.get('/api/users/:username', async (req, res) => {
-//     const user = await UserModel.findOne({ username: req.params.username});
-//     res.status(200).json(user.access);
-    
-// });
-
 router.delete('/api/users/:id', checkAccess, async (req, res) => {
     const deletedUser = await UserModel.deleteOne({ _id: req.params.id });
        res.status(200).json(deletedUser);    
@@ -60,6 +54,7 @@ router.post('/api/users/register', async (req, res) => {
     res.status(201).json(newUser);
 });
 
+// check if user is logged in and return user info
 router.get('/api/users/authenticate', checkLogin, (req, res) => {
     res.status(200).json({
         username: req.session.username,
