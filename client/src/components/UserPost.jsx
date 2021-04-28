@@ -72,7 +72,7 @@ export default function UserPost(props) {
   return (
     <div className="postContainer">
       <div className="avatarContainer">
-        <img className="avatar" src={profilepic} alt="profile pic" />
+        <img className="avatar" src={`../avatar/${props.post.avatar}.jpg`} alt="profile pic" />
       </div>
       <div>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>

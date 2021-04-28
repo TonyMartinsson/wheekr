@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import profilepic from '../assets/profilepic.png';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import UserContext from './contexts/UserContext';
@@ -8,7 +7,6 @@ import { Link } from "react-router-dom";
 
 function ProfileCard() {  
     const { user, setUser } = useContext(UserContext)
-
     const logout = () => {
         axios
           .post('/api/users/logout')
@@ -22,7 +20,7 @@ function ProfileCard() {
         
         <div style={profileContainer}>
                 <div style={userNameStyle}>
-                    <img style={profileStyle} src={profilepic} alt="profile pic" />
+                    <img style={profileStyle} src={`../avatar/${user.avatar}.jpg`} alt="profile pic" />
                     <p style={{color:'white'}}>{user.username}</p>
                     { user.access === "admin" ? (
                         <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
@@ -44,7 +42,7 @@ const profileContainer = {
 }
 
 const profileStyle = {
-    height: '3rem',
+    height: '4rem',
     margin: '0 1rem',   
     borderRadius: '50%'
 }

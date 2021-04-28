@@ -48,6 +48,7 @@ router.post('/api/posts', async (req, res) => {
     const postToSave = {
         user: req.body.user,
         message: req.body.message,
+        avatar: req.body.avatar,
         timestamp: new Date()
     }
     const post = await PostModel.create(postToSave);
