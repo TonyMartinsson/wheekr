@@ -28,7 +28,7 @@ export default function UserPost(props) {
   if (date < 10) {
     date = '0' + date;
   }
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   const deletePost = () => {
       axios
@@ -80,14 +80,15 @@ export default function UserPost(props) {
           <p style={{ margin: '1rem' }}>{props.post.user}</p>
           <p style={{ margin: '1rem', marginRight: '3rem' }}>{year + "-" + month + "-" + date}</p>
 
-          { user.name === props.post.user ? (
+          {/* { user.username === props.post.user ? ( */}
             <>
           <IconButton edge="end" aria-label="edit" onClick={openEditModal}>
             <EditIcon />
           </IconButton>
           <IconButton edge="end" aria-label="delete" onClick={deletePost}>
             <DeleteIcon />
-          </IconButton> </>) : (<p></p>)}
+          </IconButton> </>
+          {/* ) : (<p></p>)} */}
           
         </div>
         <ListItem alignItems="center">

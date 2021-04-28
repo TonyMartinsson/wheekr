@@ -7,7 +7,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 
 function ProfileCard() {  
-    const user = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     function refreshPage() {
         window.location.reload();
@@ -15,22 +15,21 @@ function ProfileCard() {
 
     const logout = () => {
         axios
-          .post('http://localhost:3000/api/users/logout')
+          .post('/api/users/logout')
           .then(res => {
             console.log(res)
-            localStorage.removeItem('LoggedInUser')
-            console.log('LS removed')
             refreshPage();
             })
     }
 
+    console.log(user)
 
     return (   
-
+        
         <div style={profileContainer}>
                 <div style={userNameStyle}>
                     <img style={profileStyle} src={profilepic} alt="profile pic" />
-                    <p style={{color:'white'}}>{user.name}</p>
+                    <p style={{color:'white'}}>{user.username}</p>
 {/* 
                     { res.data === "admin" ? (
                     

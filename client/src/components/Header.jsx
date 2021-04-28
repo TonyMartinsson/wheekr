@@ -13,11 +13,14 @@ import axios from 'axios';
 import '../css/header.css';
 
 function Header() { 
-    const [openLogin, setOpenLogin] = React.useState(false);
-    const [openSignup, setOpenSignup] = React.useState(false);
-    const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const user = useContext(UserContext)
+  const [openLogin, setOpenLogin] = React.useState(false);
+  const [openSignup, setOpenSignup] = React.useState(false);
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  
+  const {user, setUser} = useContext(UserContext);
+
+    
     const handleLoginClose = () => {
         setOpenLogin(false);
     };
@@ -41,7 +44,7 @@ function Header() {
       }
       console.log(newUser)
       axios
-        .post('http://localhost:3000/api/users/register', newUser)
+        .post('/api/users/register', newUser)
         .then(res => {
           console.log(res)
           setPassword('')
@@ -53,17 +56,18 @@ function Header() {
 
     }
 
+
     const login = ()=> {
       const body = {
         username: username,
         password: password
       }
-      console.log(body)
+      // console.log(body)
       axios
-        .post('http://localhost:3000/api/users/login', body)
+        .post('/api/users/login', body)
         .then(({ data: user }) => {
-          console.log('THIS IS A USER!', user)
-          // setUser(user);
+          // console.log(user)
+          setUser(user);
           setOpenLogin(false);
           
           // setPassword('')
@@ -76,20 +80,16 @@ function Header() {
 
     const handleSignupUsername = (e) => {
       setUsername(e.target.value)
-      console.log(username)
     }
     const handleSignupPassword = (e) => {
       setPassword(e.target.value)
-      console.log(password)
     }
 
     const handleLoginUsername = (e) => {
       setUsername(e.target.value)
-      console.log(username)
     }
     const handleLoginPassword = (e) => {
       setPassword(e.target.value)
-      console.log(password)
     }
 
     function refreshPage() {
@@ -103,7 +103,7 @@ function Header() {
         <Link to="/" >
           <img className="logoStyle" src={logo} alt="Logo" />
         </Link>
-        {!user.loggedIn? (
+        {!user? (
           <div className="buttonContainer">
 
             <Button size="medium" variant="contained" style={buttonStyle} onClick={openLoginModal}>LOGIN</Button>

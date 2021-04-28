@@ -8,11 +8,11 @@ router.get('/api/users', checkAccess, async (req, res) => {
     res.status(200).json(users);
 });
 
-router.get('/api/users/:username', async (req, res) => {
-    const user = await UserModel.findOne({ username: req.params.username});
-    res.status(200).json(user.access);
+// router.get('/api/users/:username', async (req, res) => {
+//     const user = await UserModel.findOne({ username: req.params.username});
+//     res.status(200).json(user.access);
     
-});
+// });
 
 router.delete('/api/users/:id', checkAccess, async (req, res) => {
     const deletedUser = await UserModel.deleteOne({ _id: req.params.id });

@@ -16,7 +16,7 @@ class NewsFeed extends Component {
   
     componentDidMount() {
       axios
-        .get('http://localhost:3000/api/posts')
+        .get('/api/posts')
         .then(res => {
           this.setState({
             posts: res.data
@@ -32,7 +32,7 @@ class NewsFeed extends Component {
     };
    
     render() {
-      let user = this.context
+      let { user } = this.context
       const posts = this.state.posts;
       let postList;
       if(!posts) {
@@ -42,11 +42,13 @@ class NewsFeed extends Component {
           <UserPost post={post} key={k} reload = {this.reload}/>
         );
       } 
+
+      console.log(user)
     
     return (
         <div>
           <Container maxWidth="md">            
-            {user.loggedIn? (
+            {user? (
             <NewPost reload = {this.reload}/>
             ):(<p>Please login to wheek!</p>)} 
             <List>
