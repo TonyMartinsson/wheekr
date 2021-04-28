@@ -54,21 +54,23 @@ function Header() {
     }
 
     const login = ()=> {
-      const user = {
+      const body = {
         username: username,
         password: password
       }
-      console.log(user)
+      console.log(body)
       axios
-        .post('http://localhost:3000/api/users/login', user)
-        .then(res => {
-          console.log(res)
-          setPassword('')
-          setUsername('')
+        .post('http://localhost:3000/api/users/login', body)
+        .then(({ data: user }) => {
+          console.log('THIS IS A USER!', user)
+          // setUser(user);
           setOpenLogin(false);
-          localStorage.setItem('LoggedInUser', user.username)
-          localStorage.setItem('AccessType', user.access)
-          refreshPage();
+          
+          // setPassword('')
+          // setUsername('')
+          // localStorage.setItem('LoggedInUser', user.username)
+          // localStorage.setItem('AccessType', user.access)
+          // refreshPage();
       })
     }
 

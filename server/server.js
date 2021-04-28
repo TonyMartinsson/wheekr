@@ -14,7 +14,7 @@ app.use(cookieSession({
     secret: 'aVeryS3cr3tK3y',
     secure: false,
     maxAge: 1000 * 600,
-    httpOnly: false
+    httpOnly: true
 }));
 
 app.use(userRouter, postRouter);

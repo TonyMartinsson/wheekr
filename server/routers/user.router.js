@@ -33,6 +33,14 @@ function checkAccess(req, res, next) {
     }
 }
 
+function checkLogin(req, res, next) {
+    if(req.session.username) {
+        next()   
+    } else {
+        res.status(401).json(null)
+    }
+}
+
 router.post('/api/users/register', async (req, res) => {
     const { username, password } = req.body;
 
@@ -52,6 +60,13 @@ router.post('/api/users/register', async (req, res) => {
     res.status(201).json(newUser);
 });
 
+router.get('/api/users/authenticate', checkLogin, (req, res) => {
+    res.status(200).json({
+        username: req.session.username,
+        access: req.session.role
+    })
+})
+
 router.post('/api/users/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await UserModel.findOne({username:username});
@@ -61,10 +76,9 @@ router.post('/api/users/login', async (req, res) => {
     }
 
     //create session
-    req.session.loggedInUser = user._id
     req.session.username = user.username
     req.session.role = user.access
-    res.status(204).json(user);
+    res.status(200).json(user);
 });
 
 router.post('/api/users/logout', async (req, res) => {
