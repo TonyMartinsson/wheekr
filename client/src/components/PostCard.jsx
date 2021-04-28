@@ -15,7 +15,7 @@ import { Button } from '@material-ui/core';
 import axios from 'axios';
 import '../css/userpost.css';
 
-export default function UserPost(props) {
+export default function PostCard(props) {
   const [openEdit, setOpenEdit] = React.useState(false);
   const [wheek, setWheek] = React.useState(props.post.message);
   const publishDate = new Date(props.post.timestamp);
@@ -37,7 +37,7 @@ export default function UserPost(props) {
         .catch(err => {
           console.error(err)
         })
-        // props.reload()      
+        props.reload()      
   }
 
   const editPost = () => {
@@ -52,7 +52,7 @@ export default function UserPost(props) {
           console.log(res)
         })      
         setOpenEdit(false)
-        // props.reload()
+        props.reload()
   }
 
   const openEditModal = () => {   
@@ -65,7 +65,6 @@ export default function UserPost(props) {
 
   const handleWheekChange = (e) => {
     setWheek(e.target.value)
-    console.log(wheek)
   };
 
   return (

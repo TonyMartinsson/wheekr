@@ -67,10 +67,7 @@ export default function UserPost(props) {
 
   const handleWheekChange = (e) => {
     setWheek(e.target.value)
-    console.log(wheek)
   };
-
-  console.log(user)
 
   return (
     <div className="postContainer">

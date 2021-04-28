@@ -43,8 +43,6 @@ class NewsFeed extends Component {
         );
       } 
 
-      console.log(user)
-    
     return (
         <div>
           <Container maxWidth="md">            
