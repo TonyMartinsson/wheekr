@@ -22,7 +22,7 @@ function UserCard(props) {
           .catch(err => {
             console.error(err)
           }) 
-        props.reload()
+        // props.reload()
     }      
 
     const onRadioChange = (event) => {
@@ -40,7 +40,7 @@ function UserCard(props) {
              console.error(err)
            })
                      
-         props.reload()    
+        //  props.reload()    
     };
 
     // console.log(access)

@@ -50,31 +50,22 @@ function Header() {
           setPassword('')
           setUsername('')
           setOpenSignup(false);
-          refreshPage();
           alert('New user created!');
       })
-
     }
-
 
     const login = ()=> {
       const body = {
         username: username,
         password: password
       }
-      // console.log(body)
       axios
         .post('/api/users/login', body)
         .then(({ data: user }) => {
-          // console.log(user)
           setUser(user);
-          setOpenLogin(false);
-          
-          // setPassword('')
-          // setUsername('')
-          // localStorage.setItem('LoggedInUser', user.username)
-          // localStorage.setItem('AccessType', user.access)
-          // refreshPage();
+          setOpenLogin(false);          
+          setPassword('')
+          setUsername('')
       })
     }
 
@@ -90,10 +81,6 @@ function Header() {
     }
     const handleLoginPassword = (e) => {
       setPassword(e.target.value)
-    }
-
-    function refreshPage() {
-      window.location.reload();
     }
     
     return (

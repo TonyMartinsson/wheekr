@@ -39,7 +39,7 @@ export default function UserPost(props) {
         .catch(err => {
           console.error(err)
         })
-        props.reload()      
+        // props.reload()      
   }
 
   const editPost = () => {
@@ -54,7 +54,7 @@ export default function UserPost(props) {
           console.log(res)
         })      
         setOpenEdit(false)
-        props.reload()
+        // props.reload()
   }
 
   const openEditModal = () => {   

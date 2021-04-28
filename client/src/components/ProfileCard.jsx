@@ -10,7 +10,7 @@ function ProfileCard() {
     const { user } = useContext(UserContext)
 
     function refreshPage() {
-        window.location.reload();
+         window.location.reload();
     }
 
     const logout = () => {

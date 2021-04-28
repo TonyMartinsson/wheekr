@@ -34,7 +34,7 @@ export default function NewPost(props) {
           console.log(res)
           setWheek('')
         })
-        props.reload()
+         props.reload()
       }
     const handleWheekChange = (e) => {
       setWheek(e.target.value)

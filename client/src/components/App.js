@@ -6,13 +6,9 @@ import axios from 'axios';
 
 function App() {
   const [user, setUser] = useState();
-  // const [isLoading, setIsLoading] = useState();
+  // const [posts, setPosts] = useState();
 
-  useEffect(() => {
-    // TODO
-  // axios.get("/api/users/authenticate") 
-  // user/null
-  
+  useEffect(() => {  
   axios
   .get('/api/users/authenticate')
   .then(({ data: user }) => {
@@ -26,18 +22,8 @@ function App() {
     setUser()
   })
 
-    // om ja setUser(user)
-    // annars setUser(undefined)
   }, [setUser])
-  
-  // const userLoggedIn = document.cookie;
-  // if (userLoggedIn) {
-  //   username = localStorage.getItem('LoggedInUser');
-  //   loggedIn = true;
-  // }
 
-
-  // const user = { name: username, loggedIn: loggedIn}
   return (
     <UserProvider value={{
       user,
