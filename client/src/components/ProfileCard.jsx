@@ -30,16 +30,13 @@ function ProfileCard() {
                 <div style={userNameStyle}>
                     <img style={profileStyle} src={profilepic} alt="profile pic" />
                     <p style={{color:'white'}}>{user.username}</p>
-{/* 
-                    { res.data === "admin" ? (
-                    
-                    <div></div>
-
-                    ) : ( */}
-                    <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
-                        <SettingsIcon />
-                    </Link>
-                    {/* )} */}
+                    { user.access === "admin" ? (
+                        <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
+                            <SettingsIcon />
+                        </Link>
+                         ) : ( 
+                        <div></div>
+                    )}
 
 
                     <Button size="small" variant="contained" style={buttonStyle} onClick={logout}>LOG OUT</Button>
