@@ -70,6 +70,8 @@ export default function UserPost(props) {
     console.log(wheek)
   };
 
+  console.log(user)
+
   return (
     <div className="postContainer">
       <div className="avatarContainer">
@@ -80,7 +82,7 @@ export default function UserPost(props) {
           <p style={{ margin: '1rem' }}>{props.post.user}</p>
           <p style={{ margin: '1rem', marginRight: '3rem' }}>{year + "-" + month + "-" + date}</p>
 
-          {/* { user.username === props.post.user ? ( */}
+          { user!== undefined && user.username === props.post.user ? (
             <>
           <IconButton edge="end" aria-label="edit" onClick={openEditModal}>
             <EditIcon />
@@ -88,7 +90,7 @@ export default function UserPost(props) {
           <IconButton edge="end" aria-label="delete" onClick={deletePost}>
             <DeleteIcon />
           </IconButton> </>
-          {/* ) : (<p></p>)} */}
+           ) : (<p></p>) }
           
         </div>
         <ListItem alignItems="center">

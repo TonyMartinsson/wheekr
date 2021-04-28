@@ -5,25 +5,25 @@ import { UserProvider } from './contexts/UserContext';
 import axios from 'axios';
 
 function App() {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState();
   // const [isLoading, setIsLoading] = useState();
 
   useEffect(() => {
     // TODO
   // axios.get("/api/users/authenticate") 
   // user/null
-  setUser(undefined)
-
+  
   axios
   .get('/api/users/authenticate')
   .then(({ data: user }) => {
     console.log(user)
-
+    
     setUser(user)
     
-})
+  })
   .catch(err =>{
     console.log('Error');
+    setUser()
   })
 
     // om ja setUser(user)
