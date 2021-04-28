@@ -16,10 +16,10 @@ class NewsFeed extends Component {
   
     componentDidMount() {
       axios
-        .get('http://localhost:3000/api/posts')
+        .get('/api/posts')
         .then(res => {
           this.setState({
-            posts: res.data
+            posts: res.data.reverse()
           })
       })
         .catch(err =>{
@@ -32,21 +32,21 @@ class NewsFeed extends Component {
     };
    
     render() {
-      let user = this.context
+      let { user } = this.context
       const posts = this.state.posts;
       let postList;
       if(!posts) {
         postList = "No posts!";
       } else {
-        postList = posts.reverse().map((post, k) =>
+        postList = posts.map((post, k) =>
           <UserPost post={post} key={k} reload = {this.reload}/>
         );
       } 
-    
+
     return (
         <div>
           <Container maxWidth="md">            
-            {user.loggedIn? (
+            {user? (
             <NewPost reload = {this.reload}/>
             ):(<p>Please login to wheek!</p>)} 
             <List>

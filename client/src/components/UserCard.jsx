@@ -39,11 +39,8 @@ function UserCard(props) {
            .catch(err => {
              console.error(err)
            })
-                     
-         props.reload()    
+   
     };
-
-    // console.log(access)
 
     return(
         <div>
@@ -53,13 +50,12 @@ function UserCard(props) {
                 <h4>{username}</h4>
             </Grid>
             <Grid item xs={4}>
-                {/* <p>{access}</p> */}
-                    <FormControl component="fieldset">
-                        <RadioGroup aria-label="toggle-access" name="toggle-access" value={accessType} onChange={onRadioChange}>
-                            <FormControlLabel value="user" control={<Radio />} label="User" />
-                            <FormControlLabel value="admin" control={<Radio />} label="Admin" />
-                        </RadioGroup>
-                    </FormControl>
+                <FormControl component="fieldset">
+                    <RadioGroup aria-label="toggle-access" name="toggle-access" value={accessType} onChange={onRadioChange}>
+                        <FormControlLabel value="user" control={<Radio />} label="User" />
+                        <FormControlLabel value="admin" control={<Radio />} label="Admin" />
+                    </RadioGroup>
+                </FormControl>
             </Grid>
             <Grid item xs={4}>
                 <IconButton edge="end" aria-label="edit" onClick={deleteUser}>

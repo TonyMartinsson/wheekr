@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react'
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import '../css/newpost.css';
+import UserContext from './contexts/UserContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -20,11 +21,11 @@ const useStyles = makeStyles((theme) =>
 export default function NewPost(props) {
     const [wheek, setWheek] = React.useState('');
     const classes = useStyles();  
+    const { user } = useContext(UserContext)
     
     const handleWheek = () => {
-      const user = localStorage.getItem('LoggedInUser')
       const newWheek = {
-        user: user,
+        user: user.username,
         message: wheek
       }
       axios
@@ -33,7 +34,7 @@ export default function NewPost(props) {
           console.log(res)
           setWheek('')
         })
-        props.reload()
+         props.reload()
       }
     const handleWheekChange = (e) => {
       setWheek(e.target.value)

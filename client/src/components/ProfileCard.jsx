@@ -7,42 +7,30 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 
 function ProfileCard() {  
-    const user = useContext(UserContext)
-
-    function refreshPage() {
-        window.location.reload();
-    }
+    const { user, setUser } = useContext(UserContext)
 
     const logout = () => {
         axios
-          .post('http://localhost:3000/api/users/logout')
+          .post('/api/users/logout')
           .then(res => {
             console.log(res)
-            localStorage.removeItem('LoggedInUser')
-            console.log('LS removed')
-            refreshPage();
+            setUser(undefined)
             })
     }
 
-
     return (   
-
+        
         <div style={profileContainer}>
                 <div style={userNameStyle}>
                     <img style={profileStyle} src={profilepic} alt="profile pic" />
-                    <p style={{color:'white'}}>{user.name}</p>
-{/* 
-                    { res.data === "admin" ? (
-                    
-                    <div></div>
-
-                    ) : ( */}
-                    <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
-                        <SettingsIcon />
-                    </Link>
-                    {/* )} */}
-
-
+                    <p style={{color:'white'}}>{user.username}</p>
+                    { user.access === "admin" ? (
+                        <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
+                            <SettingsIcon />
+                        </Link>
+                         ) : ( 
+                        <div></div>
+                    )}
                     <Button size="small" variant="contained" style={buttonStyle} onClick={logout}>LOG OUT</Button>
                 </div>
         </div>

@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './Layout';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { UserProvider } from './contexts/UserContext'
+import { UserProvider } from './contexts/UserContext';
+import axios from 'axios';
 
 function App() {
   const [user, setUser] = useState();
-  // const [isLoading, setIsLoading] = useState();
+  // const [posts, setPosts] = useState();
 
-  useEffect(() => {
-    // TODO
-    // är jag inloggad?? axios.get("/api/users/authenticate") user/null
-    // om ja setUser(user)
-    // annars setUser(undefined)
+  useEffect(() => {  
+  axios
+  .get('/api/users/authenticate')
+  .then(({ data: user }) => {
+    setUser(user)
+    
+  })
+  .catch(err =>{
+    console.log('No user is logged in');
+    setUser()
+  })
+
   }, [setUser])
-  
-  // const userLoggedIn = document.cookie;
-  // if (userLoggedIn) {
-  //   username = localStorage.getItem('LoggedInUser');
-  //   loggedIn = true;
-  // }
 
-
-  // const user = { name: username, loggedIn: loggedIn}
   return (
     <UserProvider value={{
       user,
