@@ -26,7 +26,7 @@ app.use((err, req, res, next) => {
 
 async function run() {
     try { 
-        await mongoose.connect('mongodb://localhost:27017/api', {useNewUrlParser: true, useUnifiedTopology: true});
+        await mongoose.connect('mongodb://localhost:27017/api', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
         console.log('Database is connected');
     } catch (error) {
         console.error(error)
