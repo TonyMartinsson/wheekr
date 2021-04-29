@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 
-export default function NewPost(props) {
+export default function NewPost() {
     const [wheek, setWheek] = React.useState('');
     const classes = useStyles();  
     const { user } = useContext(UserContext)
@@ -34,8 +34,8 @@ export default function NewPost(props) {
         .then(res => {
           console.log(res)
           setWheek('')
+          window.location.reload()
         })
-         props.reload()
       }
     const handleWheekChange = (e) => {
       setWheek(e.target.value)
