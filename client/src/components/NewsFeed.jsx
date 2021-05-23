@@ -39,7 +39,7 @@ class NewsFeed extends Component {
         postList = "No posts!";
       } else {
         postList = posts.map((post, k) =>
-          <UserPost post={post} key={k} reload = {this.reload}/>
+          <UserPost post={post} key={k} reload={this.reload}/>
         );
       } 
 
@@ -47,7 +47,7 @@ class NewsFeed extends Component {
         <div>
           <Container maxWidth="md">            
             {user? (
-            <NewPost reload = {this.reload}/>
+            <NewPost/>
             ):(<p>Please login to wheek!</p>)} 
             <List>
               {postList}

@@ -18,7 +18,11 @@ Lisa Pääjärvi
 Tony Martinsson
 
 *Dynamisk webbutveckling, 45 yhp*  
-[https://github.com/TonyMartinsson/wheekr](https://github.com/TonyMartinsson/wheekr)
+[https://github.com/TonyMartinsson/wheekr](https://github.com/TonyMartinsson/wheekr)  
+
+## Prerequisites
+
+* `Local MongoDB-server`
 
 ## Installation and start server-side
 
