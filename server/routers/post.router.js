@@ -21,7 +21,7 @@ function checkLogin(req, res, next) {
 }
 
 function checkAdminAccess(req, res, next) {
-    if(req.session.role === "admin") {
+    if(req.session.access === "admin") {
         next()   
     }
     else {
@@ -30,7 +30,7 @@ function checkAdminAccess(req, res, next) {
 }
 
 function checkAccess(req, res, next) {
-    if(req.session.role === "admin") {
+    if(req.session.access === "admin") {
         next()
     }
     else {        
@@ -43,31 +43,26 @@ function checkAccess(req, res, next) {
     }
 }
 
-router.delete('/api/posts/:id', async (req, res) => {
+router.delete('/api/posts/:id', checkLogin, async (req, res) => {
 
-    const deletedPost = await PostModel.deleteOne({ _id: req.params.id });
-    if (deletedPost.deletedCount == 0)
-    {
-        res.status(418).json(deletedPost);
-    }
-    else if (deletedPost.ok != 1)
-    {
-        res.status(417).json(deletedPost);
-    }
-    else
-    {
-       res.status(200).json(req.body.user);
+    const postToDelete = await PostModel.findOne({ _id: req.params.id });
+
+    if (req.session.access === "admin" || req.session.username === postToDelete.user) {
+        await postToDelete.remove();
+        res.status(200).json("Post was deleted.");
+      } else {
+        res.status(403).json("You can only delete your own posts.");
     }
 });
 
 router.put('/api/posts/', checkLogin, checkAccess, async (req, res) => {
     const postToEdit = await PostModel.findOneAndUpdate({ _id: req.body._id }, {message: req.body.message});
-    res.status(200).json(req.body.message);
+    res.status(200).json("Post was edited." + postToEdit.message);
 });
 
-router.post('/api/posts', async (req, res) => {
+router.post('/api/posts', checkLogin, async (req, res) => {
     const postToSave = {
-        user: req.body.user,
+        user: req.session.username,
         message: req.body.message,
         avatar: req.body.avatar,
         timestamp: new Date()

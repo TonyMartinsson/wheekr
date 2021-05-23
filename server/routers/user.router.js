@@ -19,7 +19,7 @@ router.put('/api/users/', checkAdminAccess, async (req, res) => {
 });
 
 function checkAdminAccess(req, res, next) {
-    if(req.session.role === "admin") {
+    if(req.session.access === "admin") {
         next()   
     }
     else {
@@ -59,7 +59,7 @@ router.post('/api/users/register', async (req, res) => {
 router.get('/api/users/authenticate', checkLogin, (req, res) => {
     res.status(200).json({
         username: req.session.username,
-        access: req.session.role,
+        access: req.session.access,
         avatar: req.session.avatar
     })
 })
@@ -74,7 +74,7 @@ router.post('/api/users/login', async (req, res) => {
 
     //create session
     req.session.username = user.username
-    req.session.role = user.access
+    req.session.access = user.access
     req.session.avatar = user.avatar
     res.status(200).json(user);
 });

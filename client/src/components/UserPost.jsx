@@ -38,7 +38,7 @@ export default function UserPost(props) {
         .catch(err => {
           console.error(err)
         })
-        props.reload()      
+    window.location.reload()       
   }
 
   const editPost = () => {
@@ -55,6 +55,7 @@ export default function UserPost(props) {
         })      
         setOpenEdit(false)
         props.reload()
+        
   }
 
   const openEditModal = () => {   
