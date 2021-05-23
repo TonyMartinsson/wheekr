@@ -13,6 +13,17 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:4000/api/users/register
+Content-Type: application/json
+
+{
+    "username": "test2",
+    "password": "1234",
+    "access": "user",
+    "avatar": "avatar1"
+}
+
+###
 
 POST http://localhost:4000/api/users/login
 Content-Type: application/json
@@ -20,6 +31,16 @@ Content-Type: application/json
 {
     "username": "Randomuser",
     "password": "abc"
+}
+
+###
+
+POST http://localhost:4000/api/users/login
+Content-Type: application/json
+
+{
+    "username": "test2",
+    "password": "1234"
 }
 
 ###
@@ -68,8 +89,19 @@ PUT http://localhost:4000/api/posts/
 Content-Type: application/json
 
 {
+    "_id": "60aa705eb894e63328d689ef",
+    "user": "test2",
+    "message": "hejhej!!!"
+}
+
+###
+PUT http://localhost:4000/api/posts/
+Content-Type: application/json
+
+{
     "_id": "6089dd1a3bb7b716f0ad26e7",
-    "message": "Ge mig maskrosblad nu!!!"
+    "user": "Ruben",
+    "message": "Ge mig godis!!!"
 }
 
 ###

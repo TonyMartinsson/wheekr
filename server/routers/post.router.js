@@ -7,12 +7,20 @@ router.get('/api/posts', async (req, res) => {
     res.status(200).json(posts);
 });
 
-router.get('/api/posts/adminaccess', checkAccess, async (req, res) => {
+router.get('/api/posts/adminaccess', checkAdminAccess, async (req, res) => {
     const posts = await PostModel.find({});
     res.status(200).json(posts);
 });
 
-function checkAccess(req, res, next) {
+function checkLogin(req, res, next) {
+    if(req.session.username) {
+        next()   
+    } else {
+        res.status(401).json(null)
+    }
+}
+
+function checkAdminAccess(req, res, next) {
     if(req.session.role === "admin") {
         next()   
     }
@@ -21,9 +29,17 @@ function checkAccess(req, res, next) {
     }
 }
 
-function checkUserMatch(req, res, next) {
-    if(req.session.role === "user") {
-
+function checkAccess(req, res, next) {
+    if(req.session.role === "admin") {
+        next()
+    }
+    else {        
+        if(req.session.username === req.body.user) {
+            next()
+        }
+        else {
+            res.status(403).json("You can only edit your own posts.")
+        }
     }
 }
 
@@ -44,7 +60,7 @@ router.delete('/api/posts/:id', async (req, res) => {
     }
 });
 
-router.put('/api/posts/', async (req, res) => {
+router.put('/api/posts/', checkLogin, checkAccess, async (req, res) => {
     const postToEdit = await PostModel.findOneAndUpdate({ _id: req.body._id }, {message: req.body.message});
     res.status(200).json(req.body.message);
 });

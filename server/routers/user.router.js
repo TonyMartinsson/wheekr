@@ -3,22 +3,22 @@ const UserModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 
-router.get('/api/users', checkAccess, async (req, res) => {
+router.get('/api/users', checkAdminAccess, async (req, res) => {
     const users = await UserModel.find({});
     res.status(200).json(users);
 });
 
-router.delete('/api/users/:id', checkAccess, async (req, res) => {
+router.delete('/api/users/:id', checkAdminAccess, async (req, res) => {
     const deletedUser = await UserModel.deleteOne({ _id: req.params.id });
        res.status(200).json(deletedUser);    
 });
 
-router.put('/api/users/', checkAccess, async (req, res) => {
+router.put('/api/users/', checkAdminAccess, async (req, res) => {
     const changedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {access: req.body.access});
     res.status(200).json(changedUser);
 });
 
-function checkAccess(req, res, next) {
+function checkAdminAccess(req, res, next) {
     if(req.session.role === "admin") {
         next()   
     }
