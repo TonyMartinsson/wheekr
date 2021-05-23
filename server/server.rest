@@ -1,3 +1,8 @@
+// USERS
+
+GET http://localhost:4000/api/users
+
+###
 POST http://localhost:4000/api/users/register
 Content-Type: application/json
 
@@ -9,35 +14,20 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:4000/api/posts
-
-###
-
-POST http://localhost:4000/api/posts
-Content-Type: application/json
-
-{
-    "user": "Tony",
-    "message": "Jag vill ha nya gitarrer och mer kaffe!!!!!"
-}
-
-###
-GET http://localhost:4000/api/users
-
-###
-GET http://localhost:4000/api/users/
-
-###
-
 POST http://localhost:4000/api/users/login
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "1234"
+    "username": "Randomuser",
+    "password": "abc"
 }
 
 ###
+
+POST http://localhost:4000/api/users/logout
+
+###
+
 PUT http://localhost:4000/api/users/
 Content-Type: application/json
 
@@ -48,8 +38,48 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:4000/api/posts/608132c1ec98955aac2a580f
+DELETE http://localhost:4000/api/users/60a75fe1b8f03618ec9e0f4b
+
 ###
 
 GET http://localhost:4000/api/users/authenticate
 Content-Type: application/json
+
+###
+
+// POSTS
+
+GET http://localhost:4000/api/posts
+
+###
+
+POST http://localhost:4000/api/posts
+Content-Type: application/json
+
+{
+    "user": "Tony",
+    "avatar": "avatar1",
+    "message": "Jag vill ha nya gitarrer och mer kaffe!!!!!"
+}
+
+###
+
+PUT http://localhost:4000/api/posts/
+Content-Type: application/json
+
+{
+    "_id": "6089dd1a3bb7b716f0ad26e7",
+    "message": "Ge mig maskrosblad nu!!!"
+}
+
+###
+
+DELETE http://localhost:4000/api/posts/60a7726fd292d018f8146881
+Content-Type: application/json
+{
+"_id": "60a7726fd292d018f8146881",
+  "user": "Tony",
+  "message": "Jag vill ha nya gitarrer och mer kaffe!!!!!"
+}
+
+###

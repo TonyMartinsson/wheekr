@@ -21,6 +21,12 @@ function checkAccess(req, res, next) {
     }
 }
 
+function checkUserMatch(req, res, next) {
+    if(req.session.role === "user") {
+
+    }
+}
+
 router.delete('/api/posts/:id', async (req, res) => {
 
     const deletedPost = await PostModel.deleteOne({ _id: req.params.id });
@@ -34,14 +40,13 @@ router.delete('/api/posts/:id', async (req, res) => {
     }
     else
     {
-       res.status(200).json(deletedPost);
+       res.status(200).json(req.body.user);
     }
 });
 
 router.put('/api/posts/', async (req, res) => {
     const postToEdit = await PostModel.findOneAndUpdate({ _id: req.body._id }, {message: req.body.message});
-
-    // console.log(postToEdit)
+    res.status(200).json(req.body.message);
 });
 
 router.post('/api/posts', async (req, res) => {

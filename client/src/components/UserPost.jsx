@@ -44,6 +44,7 @@ export default function UserPost(props) {
   const editPost = () => {
     const postToEdit = {
       _id: props.post._id,
+      user: props.post.user,
       message: wheek
     }
     console.log(postToEdit)

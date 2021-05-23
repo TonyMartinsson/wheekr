@@ -13,7 +13,7 @@ router.delete('/api/users/:id', checkAccess, async (req, res) => {
        res.status(200).json(deletedUser);    
 });
 
-router.put('/api/users/', async (req, res) => {
+router.put('/api/users/', checkAccess, async (req, res) => {
     const changedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {access: req.body.access});
     res.status(200).json(changedUser);
 });
