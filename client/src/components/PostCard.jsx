@@ -32,16 +32,17 @@ export default function PostCard(props) {
         .delete(`/api/posts/${props.post._id}`)
         .then(res => {
           console.log(res)
+          props.reload()  
         })
         .catch(err => {
           console.error(err)
         })
-        props.reload()      
+            
   }
 
   const editPost = () => {
     const postToEdit = {
-      _id: props.post._id,
+      id: props.post._id,
       message: wheek
     }
     console.log(postToEdit)
@@ -49,9 +50,14 @@ export default function PostCard(props) {
         .put('/api/posts/', postToEdit)
         .then(res => {
           console.log(res)
-        })      
-        setOpenEdit(false)
-        props.reload()
+          props.reload()
+          setOpenEdit(false)
+        })   
+        .catch(err => {
+          console.error(err)
+        })   
+        
+        
   }
 
   const openEditModal = () => {   
@@ -100,7 +106,7 @@ export default function PostCard(props) {
                 label="Edit wheek"
                 type="text"
                 onChange={handleWheekChange}
-                defaultValue={wheek}
+                defaultValue={props.post.message}
                 fullWidth
                 multiline
                 />

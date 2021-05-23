@@ -23,7 +23,7 @@ class UserAdministration extends Component {
            })
        })
          .catch(err =>{
-           console.log('Error');
+           console.log(err);
          })
     
         axios
@@ -34,7 +34,7 @@ class UserAdministration extends Component {
             });
         })
           .catch(err =>{
-            console.log('Error');
+            console.log(err);
           })
 
     };

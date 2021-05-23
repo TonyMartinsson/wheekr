@@ -34,11 +34,15 @@ export default function UserPost(props) {
         .delete(`/api/posts/${props.post._id}`)
         .then(res => {
           console.log(res)
+          props.reload()
+          //window.location.reload() 
+
+          
         })
         .catch(err => {
           console.error(err)
-        })
-    window.location.reload()       
+          
+        })      
   }
 
   const editPost = () => {
@@ -46,16 +50,23 @@ export default function UserPost(props) {
       id: props.post._id,
       message: wheek
     }
+
+
     axios
       .put('/api/posts/', postToEdit)
       .then(res => {
         console.log(res)
-      })      
-    setOpenEdit(false)
-    window.location.reload()      
+        props.reload()
+      })   
+      .catch(err =>{
+        console.log("Edit post " + err);
+      })   
+    setOpenEdit(false)  
+    console.log("id: " + postToEdit.id + " message: " + postToEdit.message)
   }
 
   const openEditModal = () => {   
+    console.log("Visa wheek editor för " + wheek)
     setOpenEdit(true);
   }
 
@@ -64,8 +75,13 @@ export default function UserPost(props) {
   };
 
   const handleWheekChange = (e) => {
-    setWheek(e.target.value)
+    setWheek(e.target.value)    
   };
+
+  //console.log("Skapar dialog med wheektext " )
+  if(props.post.message!==wheek) {
+    console.log("Ur synk, post.message=" + props.post.message +", wheek="+wheek)
+  }
 
   return (
     <div className="postContainer">
@@ -106,7 +122,7 @@ export default function UserPost(props) {
                 label="Edit wheek"
                 type="text"
                 onChange={handleWheekChange}
-                defaultValue={wheek}
+                defaultValue={props.post.message}
                 fullWidth
                 multiline
                 />
