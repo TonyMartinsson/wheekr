@@ -46,13 +46,16 @@ router.post('/api/posts', checkLogin, async (req, res) => {
     res.status(201).json("Post was created: " + post.message);
 });
 
-router.put('/api/posts/:id', checkLogin, async (req, res) => {
+router.put('/api/posts/', checkLogin, async (req, res) => {
+    console.log(req.body.id)
 
-    const postToEdit = await PostModel.findOne({ _id: req.params.id });
+    const postToEdit = await PostModel.findOne({ _id: req.body.id });
+    console.log(postToEdit)
 
     if (postToEdit) {
         if (req.session.access === "admin" || req.session.username === postToEdit.user) {
-            await PostModel.updateOne({ _id: req.params.id }, {message: req.body.message})
+            console.log(postToEdit.message)
+            await PostModel.updateOne({ _id: req.body.id }, {message: req.body.message})
             res.status(200).json("Post was edited: " + req.body.message);
           } else {
             res.status(403).json("You can only edit your own posts.");
@@ -67,7 +70,7 @@ router.delete('/api/posts/:id', checkLogin, async (req, res) => {
     
     const postToDelete = await PostModel.findOne({ _id: req.params.id });
 
-    if(postToDelete) {
+    if (postToDelete) {
         if (req.session.access === "admin" || req.session.username === postToDelete.user) {
             await postToDelete.remove();
             res.status(200).json("Post was deleted.");

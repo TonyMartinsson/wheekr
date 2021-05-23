@@ -3,20 +3,7 @@ const UserModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 
-router.get('/api/users', checkAdminAccess, async (req, res) => {
-    const users = await UserModel.find({});
-    res.status(200).json(users);
-});
-
-router.delete('/api/users/:id', checkAdminAccess, async (req, res) => {
-    const deletedUser = await UserModel.deleteOne({ _id: req.params.id });
-       res.status(200).json(deletedUser);    
-});
-
-router.put('/api/users/', checkAdminAccess, async (req, res) => {
-    const changedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {access: req.body.access});
-    res.status(200).json(changedUser);
-});
+// MIDDLEWARES
 
 function checkAdminAccess(req, res, next) {
     if(req.session.access === "admin") {
@@ -34,6 +21,23 @@ function checkLogin(req, res, next) {
         res.status(401).json(null)
     }
 }
+
+// ENDPOINTS
+
+router.get('/api/users', checkAdminAccess, async (req, res) => {
+    const users = await UserModel.find({});
+    res.status(200).json(users);
+});
+
+router.delete('/api/users/:id', checkAdminAccess, async (req, res) => {
+    const deletedUser = await UserModel.deleteOne({ _id: req.params.id });
+       res.status(200).json(deletedUser);    
+});
+
+router.put('/api/users/', checkAdminAccess, async (req, res) => {
+    const changedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {access: req.body.access});
+    res.status(200).json(changedUser);
+});
 
 router.post('/api/users/register', async (req, res) => {
     const { username, password, avatar } = req.body;
@@ -81,7 +85,7 @@ router.post('/api/users/login', async (req, res) => {
 
 router.post('/api/users/logout', async (req, res) => {
     req.session = null;
-    res.status(201).json("logged out");
+    res.status(200).json("logged out");
 });
 
 module.exports = router;

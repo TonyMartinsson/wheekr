@@ -58,10 +58,11 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:4000/api/posts/60aaa356542cbe0cf8a818de
+PUT http://localhost:4000/api/posts/
 Content-Type: application/json
 
 {
+    "id": "60aaad12df7fef00fcaba52a",
     "message": "Ge mig godis nu!!!"
 }
 

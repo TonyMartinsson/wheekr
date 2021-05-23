@@ -43,10 +43,11 @@ export default function UserPost(props) {
 
   const editPost = () => {
     const postToEdit = {
+      id: props.post._id,
       message: wheek
     }
     axios
-      .put(`/api/posts/${props.post._id}`, postToEdit)
+      .put('/api/posts/', postToEdit)
       .then(res => {
         console.log(res)
       })      
