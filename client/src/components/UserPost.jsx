@@ -43,19 +43,15 @@ export default function UserPost(props) {
 
   const editPost = () => {
     const postToEdit = {
-      _id: props.post._id,
-      user: props.post.user,
       message: wheek
     }
-    console.log(postToEdit)
-      axios
-        .put('/api/posts/', postToEdit)
-        .then(res => {
-          console.log(res)
-        })      
-        setOpenEdit(false)
-        props.reload()
-        
+    axios
+      .put(`/api/posts/${props.post._id}`, postToEdit)
+      .then(res => {
+        console.log(res)
+      })      
+    setOpenEdit(false)
+    window.location.reload()      
   }
 
   const openEditModal = () => {   
