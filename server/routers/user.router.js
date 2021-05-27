@@ -10,7 +10,7 @@ function checkAdminAccess(req, res, next) {
         next()   
     }
     else {
-        res.status(403).json("You are not authorized to access this route.")
+        res.status(403).json("You are not allowed to access this route.")
     }
 }
 
@@ -30,13 +30,13 @@ router.get('/api/users', checkAdminAccess, async (req, res) => {
 });
 
 router.delete('/api/users/:id', checkAdminAccess, async (req, res) => {
-    const deletedUser = await UserModel.deleteOne({ _id: req.params.id });
-       res.status(200).json(deletedUser);    
+    await UserModel.deleteOne({ _id: req.params.id });
+       res.status(200).json("User was deleted.");    
 });
 
 router.put('/api/users/', checkAdminAccess, async (req, res) => {
-    const changedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {access: req.body.access});
-    res.status(200).json(changedUser);
+    await UserModel.findOneAndUpdate({ _id: req.body._id }, {access: req.body.access});
+    res.status(200).json("User was updated.");
 });
 
 router.post('/api/users/register', async (req, res) => {
@@ -45,7 +45,7 @@ router.post('/api/users/register', async (req, res) => {
     // check if user exists
     const existingUser = await UserModel.findOne({username: username});
     if (existingUser) {
-        return res.status(400).json("Username already exists");
+        return res.status(400).json("Username already exists.");
     }
     // hash password and save user 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -85,7 +85,7 @@ router.post('/api/users/login', async (req, res) => {
 
 router.post('/api/users/logout', async (req, res) => {
     req.session = null;
-    res.status(200).json("logged out");
+    res.status(200).json("Logged out.");
 });
 
 module.exports = router;

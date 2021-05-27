@@ -17,7 +17,7 @@ function checkAdminAccess(req, res, next) {
         next()   
     }
     else {
-        res.status(403).json("You are not authorized to access this route.")
+        res.status(403).json("You are not allowed to access this route.")
     }
 }
 
@@ -50,14 +50,14 @@ router.put('/api/posts/', checkLogin, async (req, res) => {
     const postToEdit = await PostModel.findOne({ _id: req.body.id });
     if (postToEdit) {
         if (req.session.access === "admin" || req.session.username === postToEdit.user) {
-            const result = await PostModel.updateOne({ _id: req.body.id }, {message: req.body.message})
+            await PostModel.updateOne({ _id: req.body.id }, {message: req.body.message})
             res.status(200).json("Post was edited: " + req.body.message);
           } else {
             res.status(403).json("You can only edit your own posts.");
         }
     }
     else {
-        res.status(401).json("Post does not exist.");
+        res.status(404).json("Post does not exist.");
     }
 });
 
@@ -74,7 +74,7 @@ router.delete('/api/posts/:id', checkLogin, async (req, res) => {
         }
     }
     else {
-        res.status(401).json("Post does not exist.");
+        res.status(404).json("Post does not exist.");
     }
 });
 
