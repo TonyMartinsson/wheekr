@@ -54,7 +54,7 @@ POST http://localhost:4000/api/posts
 Content-Type: application/json
 
 {
-    "message": "Jag vill ha nya gitarrer och mer kaffe!!!!!"
+    "message": "Jag vill ha godis!"
 }
 
 ###

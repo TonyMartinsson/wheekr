@@ -48,12 +48,9 @@ router.post('/api/posts', checkLogin, async (req, res) => {
 
 router.put('/api/posts/', checkLogin, async (req, res) => {
     const postToEdit = await PostModel.findOne({ _id: req.body.id });
-    console.log(postToEdit)
-    console.log (req.body.message)
     if (postToEdit) {
         if (req.session.access === "admin" || req.session.username === postToEdit.user) {
             const result = await PostModel.updateOne({ _id: req.body.id }, {message: req.body.message})
-            console.log("matchade: " + result.n + " uppdaterade: " + result.nModified )
             res.status(200).json("Post was edited: " + req.body.message);
           } else {
             res.status(403).json("You can only edit your own posts.");
