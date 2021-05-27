@@ -6,7 +6,6 @@ import axios from 'axios';
 
 function App() {
   const [user, setUser] = useState();
-  // const [posts, setPosts] = useState();
 
   useEffect(() => {  
   axios

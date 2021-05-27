@@ -35,9 +35,6 @@ export default function UserPost(props) {
         .then(res => {
           console.log(res)
           props.reload()
-          //window.location.reload() 
-
-          
         })
         .catch(err => {
           console.error(err)
@@ -62,11 +59,9 @@ export default function UserPost(props) {
         console.log("Edit post " + err);
       })   
     setOpenEdit(false)  
-    console.log("id: " + postToEdit.id + " message: " + postToEdit.message)
   }
 
   const openEditModal = () => {   
-    console.log("Visa wheek editor för " + wheek)
     setOpenEdit(true);
   }
 
@@ -77,11 +72,6 @@ export default function UserPost(props) {
   const handleWheekChange = (e) => {
     setWheek(e.target.value)    
   };
-
-  //console.log("Skapar dialog med wheektext " )
-  if(props.post.message!==wheek) {
-    console.log("Ur synk, post.message=" + props.post.message +", wheek="+wheek)
-  }
 
   return (
     <div className="postContainer">

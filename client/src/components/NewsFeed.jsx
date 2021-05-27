@@ -38,7 +38,6 @@ class NewsFeed extends Component {
       if(!posts) {
         postList = "No posts!";
       } else {
-        console.log("uppdaterar posts, antal="+posts.length)
         postList = posts.map((post, k) =>
           <UserPost post={post} key={k} reload={this.reload}/>
         );

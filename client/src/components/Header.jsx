@@ -17,196 +17,195 @@ import { Button } from '@material-ui/core';
 import axios from 'axios';
 import '../css/header.css';
 
-function Header() { 
+function Header() {
   const [openLogin, setOpenLogin] = React.useState(false);
   const [openSignup, setOpenSignup] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [avatar, setAvatar] = React.useState('avatar1');
-  
-  const {user, setUser} = useContext(UserContext);
 
-    
-    const handleLoginClose = () => {
-        setOpenLogin(false);
-    };
+  const { user, setUser } = useContext(UserContext);
 
-    function openLoginModal() {
-        setOpenLogin(true);
+
+  const handleLoginClose = () => {
+    setOpenLogin(false);
+  };
+
+  function openLoginModal() {
+    setOpenLogin(true);
+  }
+
+  const handleSignupClose = () => {
+    setOpenSignup(false);
+  };
+
+  function openSignupModal() {
+    setOpenSignup(true);
+  }
+
+  const signup = () => {
+    const newUser = {
+      username: username,
+      password: password,
+      avatar: avatar
     }
-
-    const handleSignupClose = () => {
+    axios
+      .post('/api/users/register', newUser)
+      .then(res => {
+        console.log(res)
+        setPassword('')
+        setUsername('')
         setOpenSignup(false);
-    };
-
-    function openSignupModal() {
-        setOpenSignup(true);
-    }
-
-    const signup = ()=> {
-      const newUser = {
-        username: username,
-        password: password,
-        avatar: avatar
-      }
-      console.log(newUser)
-      axios
-        .post('/api/users/register', newUser)
-        .then(res => {
-          console.log(res)
-          setPassword('')
-          setUsername('')
-          setOpenSignup(false);
-          alert('New user created!');
+        alert('New user created!');
       })
-    }
+  }
 
-    const login = ()=> {
-      const body = {
-        username: username,
-        password: password
-      }
-      axios
-        .post('/api/users/login', body)
-        .then(({ data: user }) => {
-          setUser(user);
-          setOpenLogin(false);          
-          setPassword('')
-          setUsername('')
+  const login = () => {
+    const body = {
+      username: username,
+      password: password
+    }
+    axios
+      .post('/api/users/login', body)
+      .then(({ data: user }) => {
+        setUser(user);
+        setOpenLogin(false);
+        setPassword('')
+        setUsername('')
       })
-    }
+  }
 
-    const handleSignupUsername = (e) => {
-      setUsername(e.target.value)
-    }
-    const handleSignupPassword = (e) => {
-      setPassword(e.target.value)
-    }
+  const handleSignupUsername = (e) => {
+    setUsername(e.target.value)
+  }
+  const handleSignupPassword = (e) => {
+    setPassword(e.target.value)
+  }
 
-    const handleLoginUsername = (e) => {
-      setUsername(e.target.value)
-    }
+  const handleLoginUsername = (e) => {
+    setUsername(e.target.value)
+  }
 
-    const handleLoginPassword = (e) => {
-      setPassword(e.target.value)
-    }
+  const handleLoginPassword = (e) => {
+    setPassword(e.target.value)
+  }
 
-    const handleAvatar = (e) => {
-      setAvatar(e.target.value)
-    }
-    
-    return (
-      <div className="headerContainer">
+  const handleAvatar = (e) => {
+    setAvatar(e.target.value)
+  }
+
+  return (
+    <div className="headerContainer">
 
       <div className="headerStyle">
         <Link to="/" >
           <img className="logoStyle" src={logo} alt="Logo" />
         </Link>
-        {!user? (
+        {!user ? (
           <div className="buttonContainer">
 
             <Button size="medium" variant="contained" style={buttonStyle} onClick={openLoginModal}>LOGIN</Button>
             <Button size="medium" variant="contained" style={buttonStyle} onClick={openSignupModal}>SIGNUP</Button>
 
-          <Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
-            <DialogTitle id="login">Login</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Username"
-                type="text"
-                onChange={handleLoginUsername}
-                defaultValue={username}
-                fullWidth
+            <Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
+              <DialogTitle id="login">Login</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Username"
+                  type="text"
+                  onChange={handleLoginUsername}
+                  defaultValue={username}
+                  fullWidth
                 />
-              <TextField
-                margin="dense"
-                id="password"
-                label="Password"
-                type="password"
-                onChange={handleLoginPassword}
-                defaultValue={password}
-                fullWidth
+                <TextField
+                  margin="dense"
+                  id="password"
+                  label="Password"
+                  type="password"
+                  onChange={handleLoginPassword}
+                  defaultValue={password}
+                  fullWidth
                 />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleLoginClose} color="primary">
-                Go back
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleLoginClose} color="primary">
+                  Go back
                   </Button>
-              <Button onClick={login} variant="contained" color="primary">
-                Submit
+                <Button onClick={login} variant="contained" color="primary">
+                  Submit
                   </Button>
-            </DialogActions>
-          </Dialog>
+              </DialogActions>
+            </Dialog>
 
-          <Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
-            <DialogTitle id="signup">Signup</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Username"
-                type="text"
-                value={username}
-                onChange={handleSignupUsername}
-                fullWidth
+            <Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
+              <DialogTitle id="signup">Signup</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Username"
+                  type="text"
+                  value={username}
+                  onChange={handleSignupUsername}
+                  fullWidth
                 />
-              <TextField
-                margin="dense"
-                id="password"
-                label="Password"
-                type="password"
-                onChange={handleSignupPassword}
-                value={password}
-                fullWidth
+                <TextField
+                  margin="dense"
+                  id="password"
+                  label="Password"
+                  type="password"
+                  onChange={handleSignupPassword}
+                  value={password}
+                  fullWidth
                 />
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Choose avatar</FormLabel>
-                <RadioGroup row aria-label="Avatar" value={avatar} onChange={handleAvatar}>
-                  <FormControlLabel 
-                    value="avatar1" 
-                    control={<Radio />} 
-                    labelPlacement="top"
-                    label={<img src={'../avatar/avatar1.jpg'} className='avatar' alt='fluffy guinea pig'/>} 
-                  />
-                  <FormControlLabel 
-                    value="avatar2" 
-                    control={<Radio />} 
-                    labelPlacement="top"
-                    label={<img src={'../avatar/avatar2.jpg'} className='avatar' alt='fluffy guinea pig'/>} 
-                  />
-                  <FormControlLabel 
-                    value="avatar3" 
-                    control={<Radio />} 
-                    labelPlacement="top"
-                    label={<img src={'../avatar/avatar3.jpg'} className='avatar' alt='fluffy guinea pig'/>} 
-                  />
-                </RadioGroup>
-              </FormControl>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleSignupClose} color="primary">
-                Go back
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Choose avatar</FormLabel>
+                  <RadioGroup row aria-label="Avatar" value={avatar} onChange={handleAvatar}>
+                    <FormControlLabel
+                      value="avatar1"
+                      control={<Radio />}
+                      labelPlacement="top"
+                      label={<img src={'../avatar/avatar1.jpg'} className='avatar' alt='fluffy guinea pig' />}
+                    />
+                    <FormControlLabel
+                      value="avatar2"
+                      control={<Radio />}
+                      labelPlacement="top"
+                      label={<img src={'../avatar/avatar2.jpg'} className='avatar' alt='fluffy guinea pig' />}
+                    />
+                    <FormControlLabel
+                      value="avatar3"
+                      control={<Radio />}
+                      labelPlacement="top"
+                      label={<img src={'../avatar/avatar3.jpg'} className='avatar' alt='fluffy guinea pig' />}
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleSignupClose} color="primary">
+                  Go back
                   </Button>
-              <Button onClick={signup} variant="contained" color="primary">
-                Register
+                <Button onClick={signup} variant="contained" color="primary">
+                  Register
                   </Button>
-            </DialogActions>
-          </Dialog>
+              </DialogActions>
+            </Dialog>
 
-        </div> ):( 
+          </div>) : (
           <ProfileCard />)}
       </div>
-</div>
-    )
+    </div>
+  )
 }
 
 const buttonStyle = {
-    color: 'green',
-    margin: '1rem'
+  color: 'green',
+  margin: '1rem'
 }
 
 export default Header;
