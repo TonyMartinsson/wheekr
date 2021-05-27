@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import UserCard from './UserCard';
-import PostCard from './PostCard';
 import { Container, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
@@ -9,23 +8,11 @@ class UserAdministration extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        posts: [],
         users: []
       };
     }
   
     componentDidMount() {
-       axios
-         .get('/api/posts/adminaccess')
-         .then(res => {
-           this.setState({
-             posts: res.data.reverse()
-           })
-       })
-         .catch(err =>{
-           console.log(err);
-         })
-    
         axios
         .get('/api/users')
         .then(res => {
@@ -48,11 +35,6 @@ class UserAdministration extends Component {
         <UserCard user={user} key={k} reload = {this.reload}/>
         );
         
-        const posts = this.state.posts;
-        const postList = posts.map((post, k) =>
-            <PostCard post={post} key={k} reload = {this.reload}/>
-        );
-
         return(
             <div>
                 <Container maxWidth="md"> 
@@ -73,12 +55,6 @@ class UserAdministration extends Component {
                         </Grid>
                     </Grid>
                     {userList}
-                <Box align="center" p={4}>
-                <Typography variant="h5" style={{ fontWeight: 600 }}>
-                    Post administration
-                  </Typography>         
-                    </Box>
-                    {postList}
                 </Container>
             </div>
         );
